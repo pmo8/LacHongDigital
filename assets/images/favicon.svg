@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+  <defs>
+    <linearGradient id="favGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fae29c"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#997300"/>
+    </linearGradient>
+    <linearGradient id="favRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7e0c0b"/>
+      <stop offset="100%" stop-color="#3e0100"/>
+    </linearGradient>
+  </defs>
+  <path d="M 40 4 L 75 22 C 75 56 50 74 40 80 C 30 74 5 56 5 22 Z" fill="url(#favRed)" stroke="url(#favGold)" stroke-width="3"/>
+  <path d="M 40 18 C 43 16 48 15 52 16 C 55 17 53 20 47 21 C 43 22 40 25 40 25 Z" fill="url(#favGold)"/>
+  <path d="M 40 25 C 48 20 64 24 66 34 C 60 32 52 32 45 34 C 41 35 40 39 40 39 Z" fill="url(#favGold)"/>
+  <path d="M 40 30 C 49 28 62 35 61 44 C 55 40 48 41 42 43 C 40 44 39 48 39 48 Z" fill="url(#favGold)"/>
+  <circle cx="24" cy="34" r="2.5" fill="url(#favGold)"/>
+  <circle cx="28" cy="44" r="2" fill="url(#favGold)"/>
+  <circle cx="20" cy="50" r="2.5" fill="url(#favGold)"/>
+  <line x1="24" y1="34" x2="28" y2="44" stroke="url(#favGold)" stroke-width="1.5"/>
+  <line x1="28" y1="44" x2="20" y2="50" stroke="url(#favGold)" stroke-width="1.5"/>
+</svg>

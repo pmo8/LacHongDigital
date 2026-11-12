@@ -458,6 +458,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'background:' + color + ';' +
             (isStar ? 'clip-path:polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);' : 'border-radius:50%;') +
             'box-shadow:0 0 10px ' + color + ', 0 0 20px #ffd700;' +
+            '--dx:' + ((Math.random() - 0.5) * 45) + 'px;' +
             'animation:cvTreeSparkleAnim ' + (0.55 + Math.random() * 0.35) + 's ease-out forwards;';
 
           sparkleLayer.appendChild(s);

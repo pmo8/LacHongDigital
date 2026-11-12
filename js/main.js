@@ -292,4 +292,182 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+
+  // 9. Core Values - Firework Effect & Interactive Tree of Values
+  const cvInteractives = document.querySelectorAll('.cv-interactive');
+
+  if (cvInteractives.length) {
+    const fireworkColors = [
+      '#ff4444', '#ff6b35', '#ffd700', '#ff8c00',
+      '#ffffff', '#ff1744', '#ffab40', '#ef5350',
+      '#ffee58', '#f59e0b', '#f43f5e', '#fbbf24'
+    ];
+
+    function createFirework(container, count, maxDist) {
+      const fwc = container.querySelector('.cv-firework-container');
+      if (!fwc) return;
+
+      const cx = container.offsetWidth / 2;
+      const cy = container.offsetHeight / 2;
+      const total = count + Math.floor(Math.random() * 8);
+
+      for (let i = 0; i < total; i++) {
+        const p = document.createElement('div');
+        const angle = (Math.PI * 2 * i) / total + (Math.random() - 0.5) * 0.5;
+        const dist = (maxDist * 0.35) + Math.random() * (maxDist * 0.65);
+        const tx = Math.cos(angle) * dist;
+        const ty = Math.sin(angle) * dist;
+        const size = 2.5 + Math.random() * 4.5;
+        const color = fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
+        const rnd = Math.random();
+        const cls = rnd > 0.65 ? 'cv-particle comet' : rnd > 0.35 ? 'cv-particle spark' : 'cv-particle';
+
+        p.className = cls;
+        p.style.cssText =
+          'left:' + (cx - size / 2) + 'px;' +
+          'top:' + (cy - size / 2) + 'px;' +
+          'width:' + size + 'px;' +
+          'height:' + size + 'px;' +
+          'background:' + color + ';' +
+          'box-shadow:0 0 ' + (size * 3) + 'px ' + color + ';' +
+          '--tx:' + tx + 'px;' +
+          '--ty:' + ty + 'px;' +
+          'animation-delay:' + (Math.random() * 0.12) + 's;' +
+          'animation-duration:' + (0.45 + Math.random() * 0.45) + 's;';
+
+        fwc.appendChild(p);
+        setTimeout(function () { if (p.parentNode) p.parentNode.removeChild(p); }, 1200);
+      }
+    }
+
+    function createSparkles(container, count, maxDist) {
+      const fwc = container.querySelector('.cv-firework-container');
+      if (!fwc) return;
+      const cx = container.offsetWidth / 2;
+      const cy = container.offsetHeight / 2;
+
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        const angle = Math.random() * Math.PI * 2;
+        const dist = (maxDist * 0.25) + Math.random() * (maxDist * 0.75);
+        const size = 1.8 + Math.random() * 2.8;
+        const color = fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
+
+        p.className = 'cv-particle spark';
+        p.style.cssText =
+          'left:' + (cx - size / 2) + 'px;' +
+          'top:' + (cy - size / 2) + 'px;' +
+          'width:' + size + 'px;' +
+          'height:' + size + 'px;' +
+          'background:' + color + ';' +
+          'box-shadow:0 0 ' + (size * 3.5) + 'px ' + color + ';' +
+          '--tx:' + (Math.cos(angle) * dist) + 'px;' +
+          '--ty:' + (Math.sin(angle) * dist) + 'px;' +
+          'animation-duration:' + (0.35 + Math.random() * 0.35) + 's;';
+
+        fwc.appendChild(p);
+        setTimeout(function () { if (p.parentNode) p.parentNode.removeChild(p); }, 900);
+      }
+    }
+
+    var cooldowns = new WeakMap();
+
+    cvInteractives.forEach(function (el) {
+      // Bỏ qua nụ hoa: không kích hoạt pháo hoa trên nụ hoa
+      if (el.classList.contains('cv-grand-bud')) return;
+
+      var isFlower = el.classList.contains('cv-tree-flower') || el.classList.contains('cv-flower-wrap');
+      var pairId = el.getAttribute('data-pair');
+      var sparkleTimer = null;
+
+      el.addEventListener('mouseenter', function () {
+        var now = Date.now();
+        var last = cooldowns.get(el) || 0;
+        if (now - last < 350) return;
+        cooldowns.set(el, now);
+
+        // Bắn pháo hoa rực rỡ đa sắc khi rê chuột vào 6 bông hoa hoặc dòng chữ
+        var burstCount = isFlower ? 32 : 24;
+        var burstDist = isFlower ? 85 : 75;
+        createFirework(el, burstCount, burstDist);
+
+        // Hiệu ứng phát sáng hào quang đồng bộ hoa <-> chữ
+        if (pairId && pairId !== 'grand') {
+          var pairedEls = document.querySelectorAll('.cv-interactive[data-pair="' + pairId + '"]');
+          pairedEls.forEach(function (paired) {
+            if (paired !== el) paired.classList.add('is-active');
+          });
+        }
+      });
+
+      // Nhấp nháy phát sáng hào quang và bụi sao lấp lánh liên tục trong suốt thời gian rê chuột
+      el.addEventListener('mouseenter', function () {
+        sparkleTimer = setInterval(function () {
+          createSparkles(el, 4, isFlower ? 60 : 55);
+        }, 140);
+      });
+
+      el.addEventListener('mouseleave', function () {
+        if (sparkleTimer) {
+          clearInterval(sparkleTimer);
+          sparkleTimer = null;
+        }
+        if (pairId && pairId !== 'grand') {
+          var pairedEls = document.querySelectorAll('.cv-interactive[data-pair="' + pairId + '"]');
+          pairedEls.forEach(function (paired) {
+            paired.classList.remove('is-active');
+          });
+        }
+      });
+    });
+
+    // 10. Hiệu ứng lấp lánh hoàng kim khi di chuyển chuột vào thân cây
+    var treeCenter = document.querySelector('.cv-tree-center');
+    var sparkleLayer = document.querySelector('.cv-tree-sparkles-layer');
+
+    if (treeCenter && sparkleLayer) {
+      var lastSparkleTime = 0;
+      var treeGoldColors = ['#ffd700', '#fff3a8', '#fde047', '#ffb703', '#ffffff', '#e5c378'];
+
+      treeCenter.addEventListener('mousemove', function (e) {
+        // Không tạo bụi sao nếu đang rê chuột lên trên bông hoa
+        if (e.target.closest('.cv-tree-flower')) return;
+
+        var now = Date.now();
+        if (now - lastSparkleTime < 35) return; // Tạo luồng bụi sao dày dặn, mượt mà
+        lastSparkleTime = now;
+
+        var rect = treeCenter.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+
+        for (var i = 0; i < 3; i++) {
+          var s = document.createElement('div');
+          s.className = 'cv-tree-sparkle';
+          var size = 3.5 + Math.random() * 6;
+          var offsetX = (Math.random() - 0.5) * 32;
+          var offsetY = (Math.random() - 0.5) * 32;
+          var color = treeGoldColors[Math.floor(Math.random() * treeGoldColors.length)];
+          var isStar = Math.random() > 0.35;
+
+          s.style.cssText =
+            'left:' + (x + offsetX) + 'px;' +
+            'top:' + (y + offsetY) + 'px;' +
+            'width:' + size + 'px;' +
+            'height:' + size + 'px;' +
+            'background:' + color + ';' +
+            (isStar ? 'clip-path:polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);' : 'border-radius:50%;') +
+            'box-shadow:0 0 10px ' + color + ', 0 0 20px #ffd700;' +
+            'animation:cvTreeSparkleAnim ' + (0.55 + Math.random() * 0.35) + 's ease-out forwards;';
+
+          sparkleLayer.appendChild(s);
+          (function (element) {
+            setTimeout(function () {
+              if (element.parentNode) element.parentNode.removeChild(element);
+            }, 850);
+          })(s);
+        }
+      });
+    }
+  }
 });

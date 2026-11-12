@@ -1380,6 +1380,498 @@ nav {
 }
 
 /* ==========================================================================
+   GIÁ TRỊ CỐT LÕI (Core Values) - Cây Giá Trị Cốt Lõi Lạc Hồng
+   ========================================================================== */
+.core-values-section {
+  background: linear-gradient(165deg, #070708 0%, #111114 45%, #09090b 100%);
+  color: #ffffff;
+  padding: 5.5rem 0 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.core-values-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 700px 350px at 50% 12%, rgba(220, 38, 38, 0.08) 0%, transparent 100%),
+    radial-gradient(ellipse 550px 550px at 50% 75%, rgba(212, 175, 55, 0.04) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Subtle starry dust */
+.core-values-section::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    radial-gradient(1px 1px at 8% 18%, rgba(255,255,255,0.14), transparent),
+    radial-gradient(1px 1px at 25% 65%, rgba(255,255,255,0.08), transparent),
+    radial-gradient(1px 1px at 50% 12%, rgba(255,255,255,0.12), transparent),
+    radial-gradient(1px 1px at 72% 50%, rgba(255,255,255,0.08), transparent),
+    radial-gradient(1px 1px at 88% 28%, rgba(255,255,255,0.1), transparent),
+    radial-gradient(1px 1px at 15% 82%, rgba(255,255,255,0.09), transparent),
+    radial-gradient(1.5px 1.5px at 60% 88%, rgba(255,215,0,0.12), transparent),
+    radial-gradient(1px 1px at 40% 40%, rgba(255,255,255,0.06), transparent),
+    radial-gradient(1px 1px at 95% 70%, rgba(255,255,255,0.08), transparent);
+  pointer-events: none;
+}
+
+/* ── TIÊU ĐỀ NẰM BÊN NGOÀI, PHÍA TRÊN BÔNG HOA (MÀU HOÀNG KIM ĐỒNG ĐIỆU VỚI THÂN CÂY) ── */
+.cv-top-header {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 2.75rem;
+  position: relative;
+  z-index: 5;
+}
+
+.cv-golden-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  margin: 0 0 0.85rem;
+  /* Màu hoàng kim rực rỡ giống thân cây */
+  background: linear-gradient(135deg, #fff7b8 0%, #ffd700 25%, #d4af37 55%, #b45309 80%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 22px rgba(212, 175, 55, 0.55));
+  transition: all 0.35s ease;
+}
+
+.cv-golden-subtitle {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  /* Màu chữ hoàng kim đồng điệu hoàn hảo với thân cây */
+  color: #e5c378;
+  text-shadow: 0 0 14px rgba(212, 175, 55, 0.35);
+  line-height: 1.7;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* ── Container Cây Giá Trị ── */
+.cv-tree-container {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  max-width: 1320px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  min-height: 820px;
+}
+
+/* Cột Trái & Phải */
+.cv-tree-side {
+  flex: 1;
+  position: relative;
+  height: 820px;
+  box-sizing: border-box;
+}
+
+.cv-side-left {
+  align-items: flex-end;
+}
+
+.cv-side-right {
+  align-items: flex-start;
+}
+
+/* Từng dòng giá trị (Item) */
+.cv-value-item {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+
+.cv-side-left .cv-value-item {
+  justify-content: flex-end;
+  text-align: right;
+  right: 0;
+}
+
+.cv-side-right .cv-value-item {
+  justify-content: flex-start;
+  text-align: left;
+  left: 0;
+}
+
+/* Dây nối từ cành cây đến dòng chữ */
+.cv-tree-connector {
+  width: 45px;
+  height: 2px;
+  flex-shrink: 0;
+}
+
+.cv-tree-connector.left {
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.85));
+}
+
+.cv-tree-connector.right {
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.85), rgba(212, 175, 55, 0.15));
+}
+
+/* ── DÒNG CHỮ GIÁ TRỊ CỐT LÕI (HOÀN TOÀN KHÔNG CÓ NỀN VÀNG) ── */
+.cv-tree-text {
+  position: relative;
+  cursor: pointer;
+  padding: 0.6rem 0.85rem;
+  border-radius: 6px;
+  background: transparent !important; /* BỎ HOÀN TOÀN NỀN VÀNG */
+  border: none !important;
+  box-shadow: none !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: visible;
+  max-width: 360px;
+}
+
+.cv-tree-text span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: #ef4444; /* Màu đỏ ban đầu */
+  line-height: 1.6;
+  display: inline-block;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* KHI DI CHUYỂN VÀO DÒNG CHỮ: SÁNG LÊN HÀO QUANG ĐỎ KIM (KHÔNG CÓ NỀN VÀNG) */
+.cv-tree-text:hover span,
+.cv-tree-text.is-active span {
+  color: #ff3333; /* Đỏ sáng rực */
+  text-shadow:
+    0 0 10px rgba(255, 51, 51, 0.95),
+    0 0 24px rgba(255, 51, 51, 0.85),
+    0 0 40px rgba(255, 100, 100, 0.65),
+    0 0 60px rgba(255, 215, 0, 0.6); /* Hào quang đỏ kim rực rỡ */
+  transform: translateY(-2px) scale(1.04);
+}
+
+.cv-tree-text:hover,
+.cv-tree-text.is-active {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ── CỘT GIỮA: THÂN CÂY HOÀNG KIM NGHỆ THUẬT ── */
+.cv-tree-center {
+  position: relative;
+  width: 610px;
+  height: 820px;
+  flex-shrink: 0;
+  margin: 0 15px;
+}
+
+.cv-tree-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cv-golden-tree-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.3));
+}
+
+/* ── LỚP HIỆU ỨNG LẤP LÁNH KHI RÊ CHUỘT VÀO THÂN CÂY ── */
+.cv-tree-sparkles-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 6;
+  overflow: visible;
+}
+
+.cv-tree-sparkle {
+  position: absolute;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.2);
+}
+
+@keyframes cvTreeSparkleAnim {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.35) rotate(45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -90%) scale(0.25) rotate(90deg);
+  }
+}
+
+/* ── 1. NỤ HOA ĐANG CHỚM NỞ TẠI ĐỈNH NGỌN CÂY (BUDDING FLOWER) ── */
+.cv-grand-bud {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cv-bud-svg {
+  width: 100px;
+  height: 100px;
+  display: block;
+  filter: drop-shadow(0 0 8px rgba(220, 38, 38, 0.5));
+  transition: filter 0.35s ease, transform 0.35s ease;
+}
+
+/* NỤ HOA SÁNG LÊN VÀ CHỚM NỞ KHI HOVER / ACTIVE */
+.cv-grand-bud:hover,
+.cv-grand-bud.is-active {
+  transform: translate(-50%, -50%) scale(1.22);
+}
+
+.cv-grand-bud:hover .cv-bud-svg,
+.cv-grand-bud.is-active .cv-bud-svg {
+  filter:
+    drop-shadow(0 0 18px rgba(255, 60, 60, 0.95))
+    drop-shadow(0 0 36px rgba(255, 60, 60, 0.7))
+    drop-shadow(0 0 55px rgba(255, 215, 0, 0.65))
+    brightness(1.35);
+  transform: rotate(8deg);
+}
+
+/* ── DÒNG PHỤ ĐỀ NẰM BÊN DƯỚI GỐC CÂY ── */
+.cv-bottom-caption {
+  text-align: center;
+  margin-top: 2.2rem;
+  position: relative;
+  z-index: 5;
+}
+
+/* ── 6 BÔNG HOA NẰM TRÊN 6 NHÁNH CÂY ── */
+.cv-tree-flower {
+  position: absolute;
+  width: 78px;
+  height: 78px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cv-flower {
+  width: 74px;
+  height: 74px;
+  display: block;
+  filter: drop-shadow(0 0 6px rgba(220, 38, 38, 0.45));
+  transition: filter 0.35s ease, transform 0.35s ease;
+}
+
+/* BÔNG HOA SÁNG LÊN KHI HOVER / ACTIVE */
+.cv-tree-flower:hover,
+.cv-tree-flower.is-active {
+  transform: translate(-50%, -50%) scale(1.22);
+}
+
+.cv-tree-flower:hover .cv-flower,
+.cv-tree-flower.is-active .cv-flower {
+  filter:
+    drop-shadow(0 0 16px rgba(255, 60, 60, 0.95))
+    drop-shadow(0 0 35px rgba(255, 60, 60, 0.7))
+    drop-shadow(0 0 50px rgba(255, 215, 0, 0.6))
+    brightness(1.3);
+  transform: rotate(15deg);
+}
+
+/* ── HIỆU ỨNG PHÁO HOA (Chung cho Bông Hoa & Dòng Chữ) ── */
+.cv-firework-container {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 30;
+  overflow: visible;
+}
+
+.cv-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 1;
+  animation: cvFirework 0.85s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+@keyframes cvFirework {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0.15);
+  }
+}
+
+.cv-particle.spark {
+  animation: cvSpark 0.6s ease-out forwards;
+}
+
+@keyframes cvSpark {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1.3);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0);
+  }
+}
+
+.cv-particle.comet {
+  border-radius: 40%;
+  animation: cvComet 0.7s ease-out forwards;
+}
+
+@keyframes cvComet {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0.1) rotate(180deg);
+  }
+}
+
+/* ── Responsive Mobile & Tablet ── */
+@media (max-width: 1200px) {
+  .cv-tree-center {
+    width: 520px;
+    height: 700px;
+  }
+  .cv-tree-side {
+    height: 700px;
+  }
+  .cv-tree-container {
+    min-height: 700px;
+  }
+  .cv-tree-text span {
+    font-size: 1.02rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .cv-tree-container {
+    flex-direction: column;
+    align-items: center;
+    min-height: auto;
+  }
+  .cv-golden-title {
+    font-size: 2.6rem;
+  }
+  .cv-golden-subtitle {
+    font-size: 1.05rem;
+  }
+  .cv-tree-center {
+    width: 440px;
+    height: 590px;
+    order: 1;
+    margin: 0 auto 2rem;
+  }
+  .cv-grand-bud {
+    width: 90px;
+    height: 90px;
+  }
+  .cv-bud-svg {
+    width: 82px;
+    height: 82px;
+  }
+  .cv-tree-side {
+    height: auto;
+    width: 100%;
+    max-width: 560px;
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 0;
+  }
+  .cv-value-item {
+    position: static;
+    transform: none;
+    width: 100%;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  .cv-tree-connector {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .cv-golden-title {
+    font-size: 2rem;
+  }
+  .cv-golden-subtitle {
+    font-size: 0.95rem;
+    padding: 0 0.5rem;
+  }
+  .cv-tree-center {
+    width: 330px;
+    height: 440px;
+    margin-bottom: 1.5rem;
+  }
+  .cv-grand-bud {
+    width: 74px;
+    height: 74px;
+  }
+  .cv-bud-svg {
+    width: 68px;
+    height: 68px;
+  }
+  .cv-tree-flower {
+    width: 54px;
+    height: 54px;
+  }
+  .cv-flower {
+    width: 50px;
+    height: 50px;
+  }
+  .cv-tree-text span {
+    font-size: 0.94rem;
+  }
+}
+
+/* ==========================================================================
+
+/* ==========================================================================
    PHILOSOPHY & INTERNAL SPIRIT SECTION
    ========================================================================== */
 .philosophy-section {

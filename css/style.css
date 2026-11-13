@@ -2299,12 +2299,66 @@ nav {
 
 @media (max-width: 860px) {
   .philosophy-cards {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.65rem;
+  }
+  .philosophy-card {
+    padding: 1.15rem 0.5rem;
+    border-radius: 10px;
+  }
+  .philosophy-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    margin-bottom: 0.65rem;
+  }
+  .philosophy-sub {
+    font-size: 0.62rem;
+    letter-spacing: 0.3px;
+    margin-bottom: 0.4rem;
+  }
+  .philosophy-title {
+    font-size: 0.95rem;
+    line-height: 1.3;
   }
   .philosophy-quote {
-    font-size: 1.1rem;
-    line-height: 1.8;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .philosophy-cards {
+    gap: 0.4rem;
+  }
+  .philosophy-card {
+    padding: 0.85rem 0.3rem;
+    border-radius: 8px;
+  }
+  .philosophy-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1.25rem;
+    margin-bottom: 0.45rem;
+  }
+  .philosophy-sub {
+    font-size: 0.54rem;
+    letter-spacing: 0;
+    margin-bottom: 0.3rem;
+    line-height: 1.25;
+  }
+  .philosophy-title {
+    font-size: 0.82rem;
+    line-height: 1.25;
+  }
+  .philosophy-quote {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+  .philosophy-section {
+    padding: 2.2rem 0 2rem;
   }
 }
 
@@ -3198,8 +3252,7 @@ nav {
   }
 
   /* Grids */
-  .branches-grid,
-  .philosophy-cards {
+  .branches-grid {
     grid-template-columns: 1fr;
   }
   .partners-grid {

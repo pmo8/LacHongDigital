@@ -1772,39 +1772,15 @@ nav {
   transition: filter 0.35s ease, transform 0.35s ease;
 }
 
-/* BÔNG HOA SÁNG LÊN VÀ PHÁT HÀO QUANG HOÀNG KIM NHẤP NHÁY LIÊN TỤC KHI HOVER */
+/* BÔNG HOA SÁNG LÊN VÀ PHÁT HÀO QUANG HOÀNG KIM NHẸ NHÀNG KHI HOVER / ACTIVE (KHÔNG DÙNG ANIMATION FILTER NẶNG GÂY CRASH SAFARI) */
 .cv-tree-flower:hover,
 .cv-tree-flower.is-active {
-  transform: translate(-50%, -50%) scale(1.18);
+  transform: translate(-50%, -50%) scale(1.12);
 }
 
 .cv-tree-flower:hover .cv-flower,
 .cv-tree-flower.is-active .cv-flower {
-  filter:
-    drop-shadow(0 0 18px rgba(255, 215, 0, 1))
-    drop-shadow(0 0 38px rgba(245, 158, 11, 0.9))
-    drop-shadow(0 0 60px rgba(254, 240, 138, 0.8))
-    brightness(1.35);
-  animation: cvFlowerPulseGlow 1.2s ease-in-out infinite alternate;
-}
-
-@keyframes cvFlowerPulseGlow {
-  0% {
-    filter:
-      drop-shadow(0 0 14px rgba(255, 215, 0, 0.95))
-      drop-shadow(0 0 28px rgba(245, 158, 11, 0.8))
-      drop-shadow(0 0 45px rgba(254, 240, 138, 0.65))
-      brightness(1.25);
-    transform: rotate(0deg) scale(1.02);
-  }
-  100% {
-    filter:
-      drop-shadow(0 0 26px rgba(255, 225, 0, 1))
-      drop-shadow(0 0 48px rgba(245, 158, 11, 0.95))
-      drop-shadow(0 0 70px rgba(255, 255, 255, 0.85))
-      brightness(1.45);
-    transform: rotate(12deg) scale(1.14);
-  }
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.85)) brightness(1.2);
 }
 
 /* ── HIỆU ỨNG PHÁO HOA (Chung cho Bông Hoa & Dòng Chữ) ── */

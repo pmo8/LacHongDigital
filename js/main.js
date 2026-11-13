@@ -380,6 +380,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // KHI CHẠM / CLICK (Dành cho Mobile, Tablet & Desktop click)
       el.addEventListener('click', function (e) {
+        e.preventDefault();
         e.stopPropagation();
         if (currentActiveId === pairId) {
           // Chạm lần 2 vào cùng 1 giá trị -> Thu nhỏ lại như cũ

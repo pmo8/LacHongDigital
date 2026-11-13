@@ -303,24 +303,34 @@ document.addEventListener('DOMContentLoaded', function () {
       '#ffee58', '#f59e0b', '#f43f5e', '#fbbf24'
     ];
 
+    // Dọn dẹp an toàn các particle cũ trước khi tạo mới để tránh tràn bộ nhớ
+    function cleanParticles(fwc) {
+      if (!fwc) return;
+      const old = fwc.querySelectorAll('.cv-particle');
+      old.forEach(function (p) {
+        if (p.parentNode) p.parentNode.removeChild(p);
+      });
+    }
+
     function createFirework(container, count, maxDist) {
       const fwc = container.querySelector('.cv-firework-container');
       if (!fwc) return;
+      cleanParticles(fwc);
 
       const cx = container.offsetWidth / 2;
       const cy = container.offsetHeight / 2;
-      const total = count + Math.floor(Math.random() * 8);
+      const total = Math.min(count, 24); // Giới hạn số lượng an toàn cho mobile
 
       for (let i = 0; i < total; i++) {
         const p = document.createElement('div');
-        const angle = (Math.PI * 2 * i) / total + (Math.random() - 0.5) * 0.5;
-        const dist = (maxDist * 0.35) + Math.random() * (maxDist * 0.65);
+        const angle = (Math.PI * 2 * i) / total + (Math.random() - 0.5) * 0.4;
+        const dist = (maxDist * 0.4) + Math.random() * (maxDist * 0.6);
         const tx = Math.cos(angle) * dist;
         const ty = Math.sin(angle) * dist;
-        const size = 2.5 + Math.random() * 4.5;
+        const size = 2.5 + Math.random() * 4;
         const color = fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
         const rnd = Math.random();
-        const cls = rnd > 0.65 ? 'cv-particle comet' : rnd > 0.35 ? 'cv-particle spark' : 'cv-particle';
+        const cls = rnd > 0.6 ? 'cv-particle comet' : rnd > 0.3 ? 'cv-particle spark' : 'cv-particle';
 
         p.className = cls;
         p.style.cssText =
@@ -329,126 +339,131 @@ document.addEventListener('DOMContentLoaded', function () {
           'width:' + size + 'px;' +
           'height:' + size + 'px;' +
           'background:' + color + ';' +
-          'box-shadow:0 0 ' + (size * 3) + 'px ' + color + ';' +
+          'box-shadow:0 0 ' + (size * 2.5) + 'px ' + color + ';' +
           '--tx:' + tx + 'px;' +
           '--ty:' + ty + 'px;' +
-          'animation-delay:' + (Math.random() * 0.12) + 's;' +
-          'animation-duration:' + (0.45 + Math.random() * 0.45) + 's;';
+          'animation-delay:' + (Math.random() * 0.08) + 's;' +
+          'animation-duration:' + (0.4 + Math.random() * 0.35) + 's;';
 
         fwc.appendChild(p);
-        setTimeout(function () { if (p.parentNode) p.parentNode.removeChild(p); }, 1200);
+        setTimeout(function () {
+          if (p.parentNode) p.parentNode.removeChild(p);
+        }, 850);
       }
     }
 
-    function createSparkles(container, count, maxDist) {
-      const fwc = container.querySelector('.cv-firework-container');
-      if (!fwc) return;
-      const cx = container.offsetWidth / 2;
-      const cy = container.offsetHeight / 2;
-
-      for (let i = 0; i < count; i++) {
-        const p = document.createElement('div');
-        const angle = Math.random() * Math.PI * 2;
-        const dist = (maxDist * 0.25) + Math.random() * (maxDist * 0.75);
-        const size = 1.8 + Math.random() * 2.8;
-        const color = fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
-
-        p.className = 'cv-particle spark';
-        p.style.cssText =
-          'left:' + (cx - size / 2) + 'px;' +
-          'top:' + (cy - size / 2) + 'px;' +
-          'width:' + size + 'px;' +
-          'height:' + size + 'px;' +
-          'background:' + color + ';' +
-          'box-shadow:0 0 ' + (size * 3.5) + 'px ' + color + ';' +
-          '--tx:' + (Math.cos(angle) * dist) + 'px;' +
-          '--ty:' + (Math.sin(angle) * dist) + 'px;' +
-          'animation-duration:' + (0.35 + Math.random() * 0.35) + 's;';
-
-        fwc.appendChild(p);
-        setTimeout(function () { if (p.parentNode) p.parentNode.removeChild(p); }, 900);
-      }
+    // Đóng phóng to tất cả các dòng chữ giá trị
+    function resetAllZoomedTexts() {
+      document.querySelectorAll('.cv-tree-text.cv-zoomed').forEach(function (item) {
+        item.classList.remove('cv-zoomed');
+      });
+      document.querySelectorAll('.cv-interactive.is-active').forEach(function (item) {
+        item.classList.remove('is-active');
+      });
     }
 
     var cooldowns = new WeakMap();
 
     cvInteractives.forEach(function (el) {
-      // Bỏ qua nụ hoa: không kích hoạt pháo hoa trên nụ hoa
       if (el.classList.contains('cv-grand-bud')) return;
 
-      var isFlower = el.classList.contains('cv-tree-flower') || el.classList.contains('cv-flower-wrap');
+      var isFlower = el.classList.contains('cv-tree-flower');
+      var isText = el.classList.contains('cv-tree-text');
       var pairId = el.getAttribute('data-pair');
-      var sparkleTimer = null;
 
+      // 1. KHI RÊ CHUỘT (Hover trên Desktop/Tablet)
       el.addEventListener('mouseenter', function () {
         var now = Date.now();
         var last = cooldowns.get(el) || 0;
-        if (now - last < 350) return;
+        if (now - last < 250) return;
         cooldowns.set(el, now);
 
-        // Bắn pháo hoa rực rỡ đa sắc khi rê chuột vào 6 bông hoa hoặc dòng chữ
-        var burstCount = isFlower ? 32 : 24;
-        var burstDist = isFlower ? 85 : 75;
-        createFirework(el, burstCount, burstDist);
-
-        // Hiệu ứng phát sáng hào quang đồng bộ hoa <-> chữ
-        if (pairId && pairId !== 'grand') {
-          var pairedEls = document.querySelectorAll('.cv-interactive[data-pair="' + pairId + '"]');
-          pairedEls.forEach(function (paired) {
-            if (paired !== el) paired.classList.add('is-active');
-          });
+        if (isFlower) {
+          // Bông hoa: Bung pháo hoa và phát sáng
+          createFirework(el, 22, 80);
+          el.classList.add('is-active');
+          if (pairId) {
+            var pairedText = document.querySelector('.cv-tree-text[data-pair="' + pairId + '"]');
+            if (pairedText) {
+              pairedText.classList.add('is-active');
+              pairedText.classList.add('cv-zoomed');
+            }
+          }
+        } else if (isText) {
+          // Dòng chữ: Phóng to chữ to rõ để đọc dễ dàng
+          el.classList.add('cv-zoomed');
+          el.classList.add('is-active');
+          if (pairId) {
+            var pairedFlower = document.querySelector('.cv-tree-flower[data-pair="' + pairId + '"]');
+            if (pairedFlower) {
+              pairedFlower.classList.add('is-active');
+              createFirework(pairedFlower, 18, 70);
+            }
+          }
         }
       });
 
-      // Nhấp nháy phát sáng hào quang và bụi sao lấp lánh liên tục trong suốt thời gian rê chuột
-      el.addEventListener('mouseenter', function () {
-        sparkleTimer = setInterval(function () {
-          createSparkles(el, 4, isFlower ? 60 : 55);
-        }, 140);
-      });
-
+      // KHI RỜI CHUỘT (Mouse Leave): Trở lại như cũ ngay lập tức
       el.addEventListener('mouseleave', function () {
-        if (sparkleTimer) {
-          clearInterval(sparkleTimer);
-          sparkleTimer = null;
+        if (isText) {
+          el.classList.remove('cv-zoomed');
+          el.classList.remove('is-active');
+        } else {
+          el.classList.remove('is-active');
         }
-        if (pairId && pairId !== 'grand') {
+
+        if (pairId) {
           var pairedEls = document.querySelectorAll('.cv-interactive[data-pair="' + pairId + '"]');
           pairedEls.forEach(function (paired) {
             paired.classList.remove('is-active');
+            paired.classList.remove('cv-zoomed');
           });
         }
       });
 
-      // Hỗ trợ Click / Chạm (Tap) mượt mà trên Mobile & Tablet
-      el.addEventListener('click', function () {
-        var now = Date.now();
-        var last = cooldowns.get(el) || 0;
-        if (now - last < 280) return;
-        cooldowns.set(el, now);
+      // 2. KHI CHẠM / NHẤN (Tap / Click trên Mobile, Tablet & Desktop)
+      el.addEventListener('click', function (e) {
+        e.stopPropagation();
 
-        var burstCount = isFlower ? 32 : 24;
-        var burstDist = isFlower ? 85 : 75;
-        createFirework(el, burstCount, burstDist);
-        createSparkles(el, 5, isFlower ? 60 : 55);
+        if (isText) {
+          var isAlreadyZoomed = el.classList.contains('cv-zoomed');
+          resetAllZoomedTexts();
 
-        if (pairId && pairId !== 'grand') {
-          var pairedEls = document.querySelectorAll('.cv-interactive[data-pair="' + pairId + '"]');
-          pairedEls.forEach(function (paired) {
-            paired.classList.add('is-active');
-            if (paired !== el && isFlower) {
-              createFirework(paired, 16, 55);
+          if (!isAlreadyZoomed) {
+            // Phóng to dòng chữ này để người dùng đọc dễ dàng
+            el.classList.add('cv-zoomed');
+            el.classList.add('is-active');
+
+            if (pairId) {
+              var pairedFlower = document.querySelector('.cv-tree-flower[data-pair="' + pairId + '"]');
+              if (pairedFlower) {
+                pairedFlower.classList.add('is-active');
+                createFirework(pairedFlower, 20, 75);
+              }
             }
-          });
+          }
+        } else if (isFlower) {
+          // Chạm vào bông hoa: Bung pháo hoa và phóng to dòng chữ tương ứng
+          createFirework(el, 22, 80);
+          el.classList.add('is-active');
 
-          // Tự động tắt phát sáng sau 2.2 giây trên mobile/tablet
-          setTimeout(function () {
-            pairedEls.forEach(function (paired) {
-              paired.classList.remove('is-active');
-            });
-          }, 2200);
+          if (pairId) {
+            resetAllZoomedTexts();
+            var pairedText = document.querySelector('.cv-tree-text[data-pair="' + pairId + '"]');
+            if (pairedText) {
+              pairedText.classList.add('cv-zoomed');
+              pairedText.classList.add('is-active');
+            }
+          }
         }
       });
+    });
+
+    // Khi chạm / click ra ngoài vùng cây: Tự động thu nhỏ tất cả chữ về kích thước bình thường
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.cv-interactive')) {
+        resetAllZoomedTexts();
+      }
     });
 
     // 10. Hiệu ứng lấp lánh hoàng kim khi di chuyển chuột hoặc chạm vuốt vào thân cây (Cả Desktop, Tablet & Mobile)

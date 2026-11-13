@@ -1544,22 +1544,31 @@ nav {
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* KHI DI CHUYỂN VÀO DÒNG CHỮ: SÁNG LÊN HÀO QUANG ĐỎ KIM (KHÔNG CÓ NỀN VÀNG) */
-.cv-tree-text:hover span,
-.cv-tree-text.is-active span {
-  color: #ff3333;
-  text-shadow:
-    0 0 10px rgba(255, 51, 51, 0.95),
-    0 0 24px rgba(255, 51, 51, 0.85),
-    0 0 40px rgba(255, 100, 100, 0.65),
-    0 0 60px rgba(255, 215, 0, 0.6);
-  transform: translateY(-2px) scale(1.04);
+/* KHI DI CHUYỂN HOẶC CHẠM VÀO DÒNG CHỮ: PHÓNG TO CHỮ ĐỌC RÕ RÀNG */
+.cv-side-left .cv-tree-text {
+  transform-origin: right center;
+}
+
+.cv-side-right .cv-tree-text {
+  transform-origin: left center;
 }
 
 .cv-tree-text:hover,
+.cv-tree-text.cv-zoomed,
 .cv-tree-text.is-active {
-  background: transparent !important;
-  box-shadow: none !important;
+  z-index: 100;
+  transform: translateY(-2px) scale(1.15);
+}
+
+.cv-tree-text:hover span,
+.cv-tree-text.cv-zoomed span,
+.cv-tree-text.is-active span {
+  color: #fff275;
+  text-shadow:
+    0 0 10px rgba(255, 215, 0, 0.95),
+    0 0 24px rgba(255, 51, 51, 0.85),
+    0 0 40px rgba(255, 100, 100, 0.65),
+    0 0 60px rgba(255, 215, 0, 0.6);
 }
 
 /* ── CỘT GIỮA: THÂN CÂY HOÀNG KIM NGHỆ THUẬT (Thu nhỏ 75%) ── */
@@ -1979,6 +1988,7 @@ nav {
     display: block !important;
     gap: 0 !important;
     backdrop-filter: none !important;
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.25), background 0.3s ease, box-shadow 0.3s ease !important;
   }
   .cv-tree-text::before {
     display: none !important;
@@ -1988,6 +1998,33 @@ nav {
     line-height: 1.5 !important;
     color: #ef4444 !important;
     transform: none !important;
+    transition: all 0.3s ease !important;
+  }
+
+  /* KHI NHẤN / CHẠM VÀO DÒNG CHỮ TRÊN MOBILE: PHÓNG TO CHỮ TO RÕ RÀNG ĐỂ ĐỌC DỄ DÀNG */
+  .cv-tree-text.cv-zoomed {
+    z-index: 9999 !important;
+    background: rgba(22, 2, 2, 0.96) !important;
+    border: 1.5px solid #ffd700 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.95), 0 0 25px rgba(255, 215, 0, 0.75) !important;
+    padding: 0.65rem 1rem !important;
+    max-width: 320px !important;
+  }
+  .cv-side-left .cv-tree-text.cv-zoomed {
+    transform: scale(2.25) translateY(-2px) !important;
+    transform-origin: right center !important;
+  }
+  .cv-side-right .cv-tree-text.cv-zoomed {
+    transform: scale(2.25) translateY(-2px) !important;
+    transform-origin: left center !important;
+  }
+  .cv-tree-text.cv-zoomed span {
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    line-height: 1.4 !important;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.95), 0 0 16px rgba(239, 68, 68, 0.9) !important;
   }
 
   /* Khôi phục order */

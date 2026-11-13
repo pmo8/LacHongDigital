@@ -1656,6 +1656,92 @@ nav {
   filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.65)) drop-shadow(0 0 22px rgba(245, 158, 11, 0.45));
 }
 
+/* ── HỘP ĐỌC GIÁ TRỊ CỐT LÕI TO RÕ (SPOTLIGHT BOX CHO MỌI THIẾT BỊ) ── */
+.cv-spotlight-box {
+  display: none;
+  max-width: 620px;
+  margin: 1.25rem auto 0;
+  position: relative;
+  z-index: 25;
+  animation: cvSpotlightFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.cv-spotlight-box.show {
+  display: block;
+}
+
+@keyframes cvSpotlightFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.cv-spotlight-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, rgba(38, 2, 2, 0.97) 0%, rgba(18, 0, 0, 0.98) 100%);
+  border: 1.5px solid var(--gold);
+  border-radius: 12px;
+  padding: 0.9rem 1.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(212, 175, 55, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.cv-spotlight-badge {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: #1a0202;
+  background: var(--gold-gradient);
+  border-radius: 6px;
+  padding: 0.35rem 0.65rem;
+  flex-shrink: 0;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.5);
+}
+
+.cv-spotlight-text {
+  flex: 1;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #ffffff;
+  line-height: 1.45;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  text-align: left;
+}
+
+.cv-spotlight-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #fde047;
+  font-size: 1.35rem;
+  line-height: 1;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.cv-spotlight-close:hover {
+  background: var(--gold-gradient);
+  color: #1a0202;
+  transform: rotate(90deg);
+}
+
 /* ── DÒNG PHỤ ĐỀ NẰM BÊN DƯỚI GỐC CÂY ── */
 .cv-bottom-caption {
   text-align: center;
@@ -2001,30 +2087,44 @@ nav {
     transition: all 0.3s ease !important;
   }
 
-  /* KHI NHẤN / CHẠM VÀO DÒNG CHỮ TRÊN MOBILE: PHÓNG TO CHỮ TO RÕ RÀNG ĐỂ ĐỌC DỄ DÀNG */
-  .cv-tree-text.cv-zoomed {
-    z-index: 9999 !important;
-    background: rgba(22, 2, 2, 0.96) !important;
-    border: 1.5px solid #ffd700 !important;
-    border-radius: 8px !important;
-    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.95), 0 0 25px rgba(255, 215, 0, 0.75) !important;
-    padding: 0.65rem 1rem !important;
-    max-width: 320px !important;
+  /* KHI NHẤN / CHẠM VÀO DÒNG CHỮ TRÊN MOBILE: LÀM SÁNG VÀ NỔI BẬT */
+  .cv-tree-text.cv-zoomed,
+  .cv-tree-text.is-active {
+    z-index: 999 !important;
+    background: rgba(22, 2, 2, 0.95) !important;
+    border: 1.2px solid #ffd700 !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.6) !important;
+    padding: 0.4rem 0.65rem !important;
   }
-  .cv-side-left .cv-tree-text.cv-zoomed {
-    transform: scale(2.25) translateY(-2px) !important;
-    transform-origin: right center !important;
-  }
-  .cv-side-right .cv-tree-text.cv-zoomed {
-    transform: scale(2.25) translateY(-2px) !important;
-    transform-origin: left center !important;
-  }
-  .cv-tree-text.cv-zoomed span {
-    font-size: 1.05rem !important;
+  .cv-tree-text.cv-zoomed span,
+  .cv-tree-text.is-active span {
     font-weight: 800 !important;
     color: #ffffff !important;
-    line-height: 1.4 !important;
     text-shadow: 0 0 8px rgba(255, 215, 0, 0.95), 0 0 16px rgba(239, 68, 68, 0.9) !important;
+  }
+
+  /* Hộp đọc nội dung to rõ ràng cho Mobile */
+  .cv-spotlight-box {
+    margin: 0.85rem 0.75rem 0;
+    max-width: 100%;
+  }
+  .cv-spotlight-inner {
+    padding: 0.75rem 0.95rem;
+    gap: 0.75rem;
+  }
+  .cv-spotlight-badge {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.5rem;
+  }
+  .cv-spotlight-text {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  .cv-spotlight-close {
+    width: 28px;
+    height: 28px;
+    font-size: 1.2rem;
   }
 
   /* Khôi phục order */

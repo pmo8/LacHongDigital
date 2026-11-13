@@ -1062,7 +1062,11 @@
           <h4 style="color: #ffffff; margin-bottom: 1rem; font-size: 1.15rem; font-family: 'Montserrat', sans-serif;">
             <i class="fas fa-envelope-open-text text-yellow-400"></i> Nhận Hồ Sơ Năng Lực &amp; Tư Vấn
           </h4>
-          <form id="consultationForm">
+          <form id="consultationForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="0508f513-f435-4879-a179-bb0f64178e94">
+            <input type="hidden" name="subject" value="[Lạc Hồng Digital] Đăng Ký Nhận Hồ Sơ Năng Lực & Tư Vấn">
+            <input type="hidden" name="from_name" value="Lạc Hồng Digital Website">
+
             <div class="form-group">
               <input type="text" name="fullname" class="form-input" placeholder="Họ và tên Quý đối tác *" required>
             </div>
@@ -1072,7 +1076,7 @@
             <div class="form-group">
               <input type="text" name="organization" class="form-input" placeholder="Tên đơn vị / Tên dự án">
             </div>
-            <button type="submit" class="btn-primary-gradient"
+            <button type="submit" id="consultationSubmitBtn" class="btn-primary-gradient"
               style="width: 100%; justify-content: center; background: var(--gold-gradient); color: #18181b !important;">
               <i class="fas fa-paper-plane"></i> Gửi Yêu Cầu Hỗ Trợ
             </button>
@@ -1241,7 +1245,7 @@
   </button>
 
   <!-- JavaScript -->
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=20261113_03"></script>
 </body>
 
 </html>

@@ -178,13 +178,16 @@
             Vui lòng điền thông tin bên dưới, chuyên gia Lạc Hồng Digital sẽ phản hồi trong vòng 24 giờ làm việc:
           </p>
 
-          <form id="contactPageForm"
-            onsubmit="event.preventDefault(); alert('Cảm ơn Quý đối tác đã gửi thông tin liên hệ! Viện Lạc Hồng Digital tại 566 Quốc Lộ 13 sẽ liên hệ tư vấn trong thời gian sớm nhất.'); this.reset();">
+          <form id="contactPageForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="0508f513-f435-4879-a179-bb0f64178e94">
+            <input type="hidden" name="subject" value="[Lạc Hồng Digital] Yêu Cầu Tư Vấn / Hợp Tác Mới">
+            <input type="hidden" name="from_name" value="Lạc Hồng Digital Website">
+
             <div style="margin-bottom: 1rem;">
               <label
                 style="display: block; font-size: 0.85rem; font-weight: 700; color: #334155; margin-bottom: 0.35rem;">Họ
                 và tên *</label>
-              <input type="text" required placeholder="Nguyễn Văn A"
+              <input type="text" name="name" required placeholder="Nguyễn Văn A"
                 style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem; outline: none;">
             </div>
 
@@ -193,14 +196,14 @@
                 <label
                   style="display: block; font-size: 0.85rem; font-weight: 700; color: #334155; margin-bottom: 0.35rem;">Số
                   điện thoại *</label>
-                <input type="tel" required placeholder="0967 xxx xxx"
+                <input type="tel" name="phone" required placeholder="0967 xxx xxx"
                   style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem; outline: none;">
               </div>
               <div>
                 <label
                   style="display: block; font-size: 0.85rem; font-weight: 700; color: #334155; margin-bottom: 0.35rem;">Email
                   liên hệ</label>
-                <input type="email" placeholder="example@company.com"
+                <input type="email" name="email" placeholder="example@company.com"
                   style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem; outline: none;">
               </div>
             </div>
@@ -209,14 +212,14 @@
               <label
                 style="display: block; font-size: 0.85rem; font-weight: 700; color: #334155; margin-bottom: 0.35rem;">Nội
                 dung quan tâm</label>
-              <select
+              <select name="service"
                 style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem; outline: none; background: #fff;">
-                <option>Tư vấn khung năng lực PMO tích hợp số</option>
-                <option>Mô hình BIM - CDE và rà soát xung đột thiết kế</option>
-                <option>Số hóa Layout hạ tầng kỹ thuật đô thị</option>
-                <option>Nghiên cứu chiến lược quy hoạch & ESG</option>
-                <option>Đào tạo chuyên sâu cán bộ ban QLDA</option>
-                <option>Hợp tác phát triển giải pháp công nghệ</option>
+                <option value="Tư vấn khung năng lực PMO tích hợp số">Tư vấn khung năng lực PMO tích hợp số</option>
+                <option value="Mô hình BIM - CDE và rà soát xung đột thiết kế">Mô hình BIM - CDE và rà soát xung đột thiết kế</option>
+                <option value="Số hóa Layout hạ tầng kỹ thuật đô thị">Số hóa Layout hạ tầng kỹ thuật đô thị</option>
+                <option value="Nghiên cứu chiến lược quy hoạch & ESG">Nghiên cứu chiến lược quy hoạch &amp; ESG</option>
+                <option value="Đào tạo chuyên sâu cán bộ ban QLDA">Đào tạo chuyên sâu cán bộ ban QLDA</option>
+                <option value="Hợp tác phát triển giải pháp công nghệ">Hợp tác phát triển giải pháp công nghệ</option>
               </select>
             </div>
 
@@ -224,11 +227,11 @@
               <label
                 style="display: block; font-size: 0.85rem; font-weight: 700; color: #334155; margin-bottom: 0.35rem;">Thông
                 tin dự án / Lời nhắn</label>
-              <textarea rows="4" placeholder="Mô tả sơ bộ về dự án, địa điểm và nhu cầu hỗ trợ của Quý vị..."
+              <textarea name="message" rows="4" placeholder="Mô tả sơ bộ về dự án, địa điểm và nhu cầu hỗ trợ của Quý vị..."
                 style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem; outline: none;"></textarea>
             </div>
 
-            <button type="submit" class="btn-primary-gradient" style="width: 100%; justify-content: center;">
+            <button type="submit" id="contactPageSubmitBtn" class="btn-primary-gradient" style="width: 100%; justify-content: center;">
               <i class="fas fa-paper-plane"></i> Gửi Yêu Cầu Trực Tuyến
             </button>
           </form>
@@ -398,7 +401,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=20261113_03"></script>
 </body>
 
 </html>

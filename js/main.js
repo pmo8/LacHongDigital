@@ -222,23 +222,63 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 7. Consultation & Newsletter Form Handling
-  const ctaForm = document.getElementById('consultationForm');
-  if (ctaForm) {
-    ctaForm.addEventListener('submit', function (e) {
+  // 7. Consultation & Contact Form Handling (Tích hợp Web3Forms gửi thẳng về contact@lachongdigital.vn)
+  function handleWeb3FormSubmit(form, submitBtn, defaultBtnHtml, successMessage) {
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
-      const name = this.querySelector('input[name="fullname"]')?.value;
-      const phone = this.querySelector('input[name="phone"]')?.value;
 
-      if (!phone) {
-        alert('Vui lòng nhập số điện thoại để chuyên gia Lạc Hồng Digital liên hệ hỗ trợ!');
-        return;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang gửi yêu cầu...';
       }
 
-      alert(`Cảm ơn Quý khách ${name ? name : ''}! Viện Nghiên Cứu Chiến Lược Và Phát Triển Lạc Hồng (Lạc Hồng Digital) đã nhận thông tin và sẽ liên hệ tư vấn trong thời gian sớm nhất.`);
-      ctaForm.reset();
+      const formData = new FormData(form);
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      })
+        .then(async function (response) {
+          const json = await response.json();
+          if (response.status === 200 && json.success) {
+            alert(successMessage || 'Cảm ơn Quý đối tác! Yêu cầu đã được gửi thành công đến hòm thư contact@lachongdigital.vn. Chuyên viên Viện Lạc Hồng Digital sẽ liên hệ trong thời gian sớm nhất.');
+            form.reset();
+          } else {
+            alert(json.message || 'Có lỗi xảy ra khi gửi. Quý vị vui lòng thử lại hoặc liên hệ hotline: 0909.860.118!');
+          }
+        })
+        .catch(function () {
+          alert('Không thể kết nối đến máy chủ gửi thư. Quý vị vui lòng gọi hotline 0909.860.118 để được hỗ trợ tức thì!');
+        })
+        .finally(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = defaultBtnHtml;
+          }
+        });
     });
   }
+
+  // 7.1. Form Gửi Yêu Cầu Tư Vấn / Hợp Tác (trên trang liên hệ lien-he.html)
+  const contactPageForm = document.getElementById('contactPageForm');
+  const contactPageSubmitBtn = document.getElementById('contactPageSubmitBtn');
+  handleWeb3FormSubmit(
+    contactPageForm,
+    contactPageSubmitBtn,
+    '<i class="fas fa-paper-plane"></i> Gửi Yêu Cầu Trực Tuyến',
+    'Cảm ơn Quý đối tác! Yêu cầu tư vấn / hợp tác đã được gửi thành công đến hòm thư contact@lachongdigital.vn. Chuyên gia Lạc Hồng Digital sẽ phản hồi trong vòng 24 giờ làm việc.'
+  );
+
+  // 7.2. Form Nhận Hồ Sơ Năng Lực & Tư Vấn (trên trang chủ index.html)
+  const ctaForm = document.getElementById('consultationForm');
+  const consultationSubmitBtn = document.getElementById('consultationSubmitBtn');
+  handleWeb3FormSubmit(
+    ctaForm,
+    consultationSubmitBtn,
+    '<i class="fas fa-paper-plane"></i> Gửi Yêu Cầu Hỗ Trợ',
+    'Cảm ơn Quý đối tác! Yêu cầu nhận hồ sơ năng lực & tư vấn đã được gửi thành công đến hòm thư contact@lachongdigital.vn. Chuyên viên Lạc Hồng Digital sẽ liên hệ sớm nhất.'
+  );
 
   const newsletterForm = document.getElementById('newsletterForm');
   if (newsletterForm) {

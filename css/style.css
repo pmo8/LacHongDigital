@@ -1644,7 +1644,7 @@ nav {
   width: 70px;
   height: 70px;
   display: block;
-  filter: drop-shadow(0 0 8px rgba(220, 38, 38, 0.5));
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.65)) drop-shadow(0 0 22px rgba(245, 158, 11, 0.45));
 }
 
 /* ── DÒNG PHỤ ĐỀ NẰM BÊN DƯỚI GỐC CÂY ── */
@@ -1655,7 +1655,7 @@ nav {
   z-index: 5;
 }
 
-/* ── 6 BÔNG HOA NẰM TRÊN 6 NHÁNH CÂY (TĂNG KÍCH THƯỚC LỚN HƠN) ── */
+/* ── 6 BÔNG HOA NẰM TRÊN 6 NHÁNH CÂY (TĂNG KÍCH THƯỚC LỚN HƠN & MÀU HOÀNG KIM) ── */
 .cv-tree-flower {
   position: absolute;
   width: 84px; /* Tăng kích thước bông hoa nổi bật hơn */
@@ -1673,11 +1673,11 @@ nav {
   width: 80px; /* Bông hoa to đẹp, nở rộ */
   height: 80px;
   display: block;
-  filter: drop-shadow(0 0 8px rgba(220, 38, 38, 0.55));
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.65)) drop-shadow(0 0 20px rgba(245, 158, 11, 0.4));
   transition: filter 0.35s ease, transform 0.35s ease;
 }
 
-/* BÔNG HOA SÁNG LÊN VÀ PHÁT HÀO QUANG NHẤP NHÁY LIÊN TỤC KHI HOVER */
+/* BÔNG HOA SÁNG LÊN VÀ PHÁT HÀO QUANG HOÀNG KIM NHẤP NHÁY LIÊN TỤC KHI HOVER */
 .cv-tree-flower:hover,
 .cv-tree-flower.is-active {
   transform: translate(-50%, -50%) scale(1.18);
@@ -1686,28 +1686,28 @@ nav {
 .cv-tree-flower:hover .cv-flower,
 .cv-tree-flower.is-active .cv-flower {
   filter:
-    drop-shadow(0 0 16px rgba(255, 60, 60, 0.95))
-    drop-shadow(0 0 35px rgba(255, 60, 60, 0.75))
-    drop-shadow(0 0 55px rgba(255, 215, 0, 0.7))
-    brightness(1.4);
+    drop-shadow(0 0 18px rgba(255, 215, 0, 1))
+    drop-shadow(0 0 38px rgba(245, 158, 11, 0.9))
+    drop-shadow(0 0 60px rgba(254, 240, 138, 0.8))
+    brightness(1.35);
   animation: cvFlowerPulseGlow 1.2s ease-in-out infinite alternate;
 }
 
 @keyframes cvFlowerPulseGlow {
   0% {
     filter:
-      drop-shadow(0 0 14px rgba(255, 50, 50, 0.95))
-      drop-shadow(0 0 28px rgba(255, 215, 0, 0.75))
-      drop-shadow(0 0 45px rgba(255, 60, 60, 0.5))
-      brightness(1.3);
+      drop-shadow(0 0 14px rgba(255, 215, 0, 0.95))
+      drop-shadow(0 0 28px rgba(245, 158, 11, 0.8))
+      drop-shadow(0 0 45px rgba(254, 240, 138, 0.65))
+      brightness(1.25);
     transform: rotate(0deg) scale(1.02);
   }
   100% {
     filter:
-      drop-shadow(0 0 24px rgba(255, 70, 70, 1))
-      drop-shadow(0 0 45px rgba(255, 225, 0, 0.95))
-      drop-shadow(0 0 65px rgba(255, 100, 100, 0.75))
-      brightness(1.5);
+      drop-shadow(0 0 26px rgba(255, 225, 0, 1))
+      drop-shadow(0 0 48px rgba(245, 158, 11, 0.95))
+      drop-shadow(0 0 70px rgba(255, 255, 255, 0.85))
+      brightness(1.45);
     transform: rotate(12deg) scale(1.14);
   }
 }
@@ -1776,102 +1776,261 @@ nav {
   }
 }
 
-/* ── Responsive Mobile & Tablet ── */
-@media (max-width: 1200px) {
-  .cv-tree-center {
-    width: 520px;
-    height: 700px;
-  }
-  .cv-tree-side {
-    height: 700px;
-  }
-  .cv-tree-container {
-    min-height: 700px;
-  }
-  .cv-tree-text span {
-    font-size: 1.02rem;
-  }
-}
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN CHO MỤC GIÁ TRỊ CỐT LÕI (TABLET & MOBILE)
+   ══════════════════════════════════════════════════════════════════════════ */
 
-@media (max-width: 992px) {
-  .cv-tree-container {
-    flex-direction: column;
-    align-items: center;
-    min-height: auto;
+/* ── 1. TABLET LANDSCAPE & MÀN HÌNH VỪA (992px - 1199px) ── */
+@media (max-width: 1199px) and (min-width: 992px) {
+  .core-values-section {
+    padding: 3.2rem 0 2.8rem;
   }
   .cv-golden-title {
-    font-size: 2.6rem;
+    font-size: 2.15rem;
   }
-  .cv-golden-subtitle {
-    font-size: 1.05rem;
+  .cv-tree-container {
+    max-width: 960px;
+    min-height: 530px;
   }
   .cv-tree-center {
-    width: 440px;
-    height: 590px;
-    order: 1;
-    margin: 0 auto 2rem;
-  }
-  .cv-grand-bud {
-    width: 90px;
-    height: 90px;
-  }
-  .cv-bud-svg {
-    width: 82px;
-    height: 82px;
+    width: 390px;
+    height: 520px;
+    margin: 0 6px;
   }
   .cv-tree-side {
-    height: auto;
-    width: 100%;
-    max-width: 560px;
-    order: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    padding: 0;
+    height: 520px;
   }
-  .cv-value-item {
-    position: static;
-    transform: none;
-    width: 100%;
-    justify-content: center !important;
-    text-align: center !important;
-  }
-  .cv-tree-connector {
-    display: none;
-  }
-}
-
-@media (max-width: 576px) {
-  .cv-golden-title {
-    font-size: 2rem;
-  }
-  .cv-golden-subtitle {
-    font-size: 0.95rem;
-    padding: 0 0.5rem;
-  }
-  .cv-tree-center {
-    width: 330px;
-    height: 440px;
-    margin-bottom: 1.5rem;
-  }
-  .cv-grand-bud {
+  .cv-tree-flower {
     width: 74px;
     height: 74px;
   }
-  .cv-bud-svg {
-    width: 68px;
-    height: 68px;
-  }
-  .cv-tree-flower {
-    width: 54px;
-    height: 54px;
-  }
   .cv-flower {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
+  }
+  .cv-grand-bud {
+    width: 66px;
+    height: 66px;
+  }
+  .cv-bud-svg {
+    width: 60px;
+    height: 60px;
+  }
+  .cv-tree-connector {
+    width: 24px;
+  }
+  .cv-tree-text {
+    max-width: 235px;
+    padding: 0.35rem 0.55rem;
   }
   .cv-tree-text span {
-    font-size: 0.94rem;
+    font-size: 0.88rem;
+  }
+}
+
+/* ── 2. TABLET PORTRAIT (768px - 991px) ── */
+@media (max-width: 991px) and (min-width: 768px) {
+  .core-values-section {
+    padding: 2.8rem 0 2.2rem;
+  }
+  .cv-golden-title {
+    font-size: 1.95rem;
+    margin-bottom: 0.4rem;
+  }
+  .cv-golden-subtitle {
+    font-size: 0.88rem;
+  }
+  .cv-tree-container {
+    max-width: 740px;
+    min-height: 450px;
+  }
+  .cv-tree-center {
+    width: 335px;
+    height: 448px;
+    margin: 0 4px;
+  }
+  .cv-tree-side {
+    height: 448px;
+  }
+  .cv-tree-flower {
+    width: 62px;
+    height: 62px;
+  }
+  .cv-flower {
+    width: 58px;
+    height: 58px;
+  }
+  .cv-grand-bud {
+    width: 58px;
+    height: 58px;
+  }
+  .cv-bud-svg {
+    width: 52px;
+    height: 52px;
+  }
+  .cv-tree-connector {
+    width: 16px;
+  }
+  .cv-tree-text {
+    max-width: 185px;
+    padding: 0.3rem 0.45rem;
+  }
+  .cv-tree-text span {
+    font-size: 0.81rem;
+    line-height: 1.4;
+  }
+}
+
+/* ── 3. MOBILE TOÀN DIỆN (< 768px) ── */
+@media (max-width: 767px) {
+  .core-values-section {
+    padding: 2rem 0 1.5rem;
+    overflow: hidden; /* tránh thanh scroll ngang */
+  }
+  /* Bỏ padding ngang của container cha để scale không bị ảnh hưởng */
+  .core-values-section > .container {
+    padding-left: 0;
+    padding-right: 0;
+    overflow: visible;
+  }
+  .cv-golden-title {
+    font-size: 1.6rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+    padding: 0 1rem;
+  }
+  .cv-golden-subtitle {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    padding: 0 1rem;
+  }
+
+  /* ── Scale toàn bộ cây + giá trị vừa 1 màn hình ── */
+  .cv-tree-container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+    /* Đặt width cố định 1040px như desktop để scale đúng */
+    width: 1040px;
+    max-width: none;
+    min-height: 615px;
+    /* Scale xuống vừa màn hình điện thoại (390/1040 ≈ 0.375) */
+    transform: scale(0.375);
+    transform-origin: top center;
+    /* Dịch margin âm để nội dung phía sau không bị đẩy xuống quá */
+    margin-bottom: calc(615px * 0.375 - 615px - 20px);
+    /* Căn giữa container 1040px trong viewport nhỏ hơn */
+    margin-left: calc((100% - 1040px) / 2);
+    overflow: visible;
+    position: relative;
+  }
+
+  /* Khôi phục các side về layout gốc (undo flex-direction: column từ media trước) */
+  .cv-tree-side {
+    display: block;
+    flex: 1;
+    position: relative;
+    height: 615px;
+  }
+
+  /* Khôi phục value item về absolute như desktop */
+  .cv-value-item {
+    position: absolute !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    top: unset;
+    left: unset;
+    right: unset;
+    transform: translateY(-50%) !important;
+    margin: 0 !important;
+    justify-content: unset !important;
+    text-align: unset !important;
+  }
+  .cv-side-left .cv-value-item {
+    justify-content: flex-end !important;
+    text-align: right !important;
+    right: 0 !important;
+  }
+  .cv-side-right .cv-value-item {
+    justify-content: flex-start !important;
+    text-align: left !important;
+    left: 0 !important;
+  }
+
+  /* Khôi phục connector */
+  .cv-tree-connector {
+    display: block !important;
+    width: 32px;
+    height: 2px;
+    flex-shrink: 0;
+  }
+
+  /* Khôi phục tree text về dạng gốc */
+  .cv-tree-text {
+    width: auto !important;
+    max-width: 275px !important;
+    padding: 0.45rem 0.65rem !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    display: block !important;
+    gap: 0 !important;
+    backdrop-filter: none !important;
+  }
+  .cv-tree-text::before {
+    display: none !important;
+  }
+  .cv-tree-text span {
+    font-size: 0.94rem !important;
+    line-height: 1.5 !important;
+    color: #ef4444 !important;
+    transform: none !important;
+  }
+
+  /* Khôi phục order */
+  .cv-item-1,
+  .cv-item-2,
+  .cv-item-3,
+  .cv-item-4,
+  .cv-item-5,
+  .cv-item-6 {
+    order: unset;
+  }
+
+  /* Kích thước hoa giữ như desktop nhỏ */
+  .cv-tree-flower {
+    width: 70px;
+    height: 70px;
+  }
+  .cv-flower {
+    width: 65px;
+    height: 65px;
+  }
+  .cv-grand-bud {
+    width: 62px;
+    height: 62px;
+  }
+  .cv-bud-svg {
+    width: 56px;
+    height: 56px;
+  }
+
+  .cv-bottom-caption {
+    margin-top: 0.75rem;
+  }
+}
+
+/* ── 4. MOBILE NHỎ (< 400px, vd: iPhone SE) ── */
+@media (max-width: 400px) {
+  .cv-golden-title {
+    font-size: 1.35rem;
+  }
+  .cv-tree-container {
+    transform: scale(0.32);
+    margin-bottom: calc((615px * 0.32) - 615px);
   }
 }
 
@@ -2650,6 +2809,13 @@ nav {
 /* ==========================================================================
    RESPONSIVE DESIGN (Media Queries)
    ========================================================================== */
+
+/* ── Utility classes ── */
+.hidden-mobile { display: inline-flex !important; }
+
+/* ══════════════════════════════════════════════
+   TABLET LANDSCAPE  ≤ 1200px
+══════════════════════════════════════════════ */
 @media (max-width: 1200px) {
   .nav-menu {
     gap: 1rem;
@@ -2672,8 +2838,14 @@ nav {
   .footer-top {
     grid-template-columns: repeat(2, 1fr);
   }
+  .page-banner-title {
+    font-size: 2rem;
+  }
 }
 
+/* ══════════════════════════════════════════════
+   TABLET PORTRAIT  ≤ 992px
+══════════════════════════════════════════════ */
 @media (max-width: 992px) {
   .header-inner {
     height: 75px;
@@ -2691,13 +2863,15 @@ nav {
     width: 100%;
     background: #ffffff;
     flex-direction: column;
-    padding: 1.5rem 1.25rem;
+    padding: 0.75rem 1rem 1.5rem;
     gap: 0;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
     border-bottom: 3px solid var(--primary);
     max-height: calc(100vh - 75px);
     overflow-y: auto;
     display: none;
+    z-index: 1200;
+    align-items: flex-start;
   }
   .nav-menu.open {
     display: flex;
@@ -2707,56 +2881,234 @@ nav {
     border-bottom: 1px solid #f1f5f9;
   }
   .nav-link {
-    padding: 0.85rem 0;
+    padding: 0.85rem 0.5rem;
     width: 100%;
     justify-content: space-between;
+    white-space: normal;
+    word-break: break-word;
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+  .nav-link::after {
+    display: none;
   }
   .dropdown-menu {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
+    position: static !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
     width: 100%;
     box-shadow: none;
     border: none;
-    border-left: 2px solid var(--gold);
+    border-left: 3px solid var(--gold);
     border-radius: 0;
     background: #f8fafc;
     display: none;
-    padding-left: 0.5rem;
+    padding: 0.25rem 0 0.25rem 0.75rem;
+    margin-top: 0;
   }
   .nav-item.dropdown-open > .dropdown-menu {
     display: block;
   }
+  .dropdown-item {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.85rem;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.4;
+    border-left: none;
+  }
+  .dropdown-item:hover {
+    padding-left: 1rem;
+  }
   .btn-primary-gradient.desktop-only {
     display: none;
   }
+  /* Hero */
   .hero-title {
     font-size: 2.1rem;
   }
+  .hero-content {
+    padding: 3.5rem 0 4rem;
+  }
+  .hero-actions {
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+  /* Stats */
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  /* About */
   .about-welcome {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
+  .about-experience-card {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: 1.5rem;
+    max-width: 100%;
+  }
+  /* CTA */
   .cta-banner {
     grid-template-columns: 1fr;
     padding: 2.5rem;
   }
+  .cta-banner h2 {
+    font-size: 1.75rem;
+  }
+  /* Counter */
   .counter-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .counter-card:nth-child(2) {
     border-right: none;
   }
+  /* Partners */
   .partners-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem;
   }
+  /* Page banner */
+  .page-banner {
+    padding: 2.8rem 0;
+  }
+  .page-banner-title {
+    font-size: 1.9rem;
+  }
+  /* Branches */
+  .branches-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  /* Org chart (gioi-thieu.html) */
+  .org-chart-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }
 
+/* ══════════════════════════════════════════════
+   MOBILE  ≤ 768px
+══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Utilities */
+  .hidden-mobile {
+    display: none !important;
+  }
+
+  /* Top bar */
+  .top-bar {
+    display: none;
+  }
+
+  /* Hero */
+  .hero-slider-section {
+    min-height: 480px;
+  }
+  .hero-content {
+    padding: 2.5rem 0 3rem;
+    text-align: center;
+  }
+  .hero-title {
+    font-size: 1.9rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  .hero-desc {
+    font-size: 0.95rem;
+  }
+  .hero-badge {
+    margin: 0 auto 1rem;
+  }
+  .hero-actions {
+    justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  .hero-actions a,
+  .hero-actions button {
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* About */
+  .about-experience-card {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    margin-top: 1.5rem;
+  }
+
+  /* CTA banner */
+  .cta-banner {
+    padding: 2rem 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .cta-banner h2 {
+    font-size: 1.55rem;
+  }
+
+  /* Page banner */
+  .page-banner {
+    padding: 2rem 0;
+  }
+  .page-banner-title {
+    font-size: 1.55rem;
+  }
+
+  /* Grids */
+  .branches-grid,
+  .philosophy-cards {
+    grid-template-columns: 1fr;
+  }
+  .partners-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  /* Footer */
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  /* Org chart (gioi-thieu.html) */
+  .org-chart-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Contact form row (lien-he.html) */
+  .contact-form-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Project/service filter buttons */
+  .filter-btn {
+    font-size: 0.82rem;
+    padding: 0.5rem 1rem;
+  }
+
+  /* Back to top */
+  .back-to-top {
+    bottom: 15px;
+    right: 15px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   MOBILE SMALL  ≤ 640px
+══════════════════════════════════════════════ */
 @media (max-width: 640px) {
   .top-bar-left, .top-bar-right {
     justify-content: center;
@@ -2770,6 +3122,9 @@ nav {
   }
   .hero-subtitle {
     font-size: 1.05rem;
+  }
+  .hero-actions {
+    gap: 0.75rem;
   }
   .stats-grid,
   .services-grid,
@@ -2790,12 +3145,82 @@ nav {
     padding-bottom: 1rem;
   }
   .cta-banner {
-    padding: 1.75rem 1.25rem;
+    padding: 1.5rem 1rem;
+  }
+  .cta-banner h2 {
+    font-size: 1.4rem;
   }
   .section {
     padding: 3.5rem 0;
   }
   .section-title {
     font-size: 1.65rem;
+  }
+  .page-banner {
+    padding: 1.5rem 0;
+  }
+  .page-banner-title {
+    font-size: 1.35rem;
+  }
+  .pillars-grid {
+    grid-template-columns: 1fr;
+  }
+  .filter-btn {
+    font-size: 0.8rem;
+    padding: 0.45rem 0.85rem;
+  }
+  .back-to-top {
+    bottom: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+  }
+  /* Org chart – 1 col on small mobile */
+  .org-chart-grid {
+    grid-template-columns: 1fr !important;
+  }
+  /* Newsletter */
+  .newsletter-box {
+    flex-direction: column;
+  }
+  .newsletter-input {
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+  }
+  .newsletter-btn {
+    border-radius: 6px;
+    padding: 0.65rem 1rem;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   EXTRA SMALL MOBILE  ≤ 400px
+══════════════════════════════════════════════ */
+@media (max-width: 400px) {
+  .hero-title {
+    font-size: 1.45rem;
+  }
+  .section-title {
+    font-size: 1.45rem;
+  }
+  .page-banner-title {
+    font-size: 1.2rem;
+  }
+  .stat-card-top {
+    padding: 1.25rem 0.75rem;
+  }
+  .hero-content {
+    padding: 2rem 0 2.5rem;
+  }
+  .hero-actions a,
+  .hero-actions button {
+    font-size: 0.88rem;
+    padding: 0.65rem 1.25rem;
+  }
+  .cta-banner h2 {
+    font-size: 1.25rem;
+  }
+  .footer-top {
+    gap: 1.5rem;
   }
 }

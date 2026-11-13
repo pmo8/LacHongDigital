@@ -167,7 +167,7 @@
           <div style="width: 2px; height: 30px; background: var(--gold);"></div>
 
           <!-- Level 3: Khối Trung Tâm Chuyên Môn -->
-          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; width: 100%;">
+          <div class="org-chart-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; width: 100%;">
             <div
               style="background: #f8fafc; border: 1px solid #e2e8f0; border-top: 3px solid var(--primary); padding: 1.2rem; border-radius: 6px; text-align: center;">
               <h4 style="font-size: 0.95rem; color: var(--primary);">Khối Nghiên Cứu Chiến Lược</h4>
@@ -258,99 +258,116 @@
           <!-- LỚP HIỆU ỨNG LẤP LÁNH KHI RÊ CHUỘT VÀO THÂN CÂY -->
           <div class="cv-tree-sparkles-layer"></div>
 
-          <!-- 1. NỤ HOA ĐANG CHỚM NỞ TẠI ĐỈNH NGỌN CÂY -->
+          <!-- 1. NỤ HOA ĐANG CHỚM NỞ TẠI ĐỈNH NGỌN CÂY (MÀU HOÀNG KIM) -->
           <div class="cv-tree-flower cv-grand-bud" data-pair="grand" style="top: 8%; left: 48.5%;">
             <svg class="cv-flower cv-bud-svg" viewBox="0 0 120 140">
               <defs>
                 <radialGradient id="budPetalGrad" cx="50%" cy="60%" r="65%">
-                  <stop offset="0%" stop-color="#ff6b6b"/>
-                  <stop offset="40%" stop-color="#ee2a2a"/>
-                  <stop offset="85%" stop-color="#b91c1c"/>
-                  <stop offset="100%" stop-color="#700909"/>
+                  <stop offset="0%" stop-color="#fff8db"/>
+                  <stop offset="25%" stop-color="#fde047"/>
+                  <stop offset="60%" stop-color="#d4af37"/>
+                  <stop offset="85%" stop-color="#b45309"/>
+                  <stop offset="100%" stop-color="#78350f"/>
                 </radialGradient>
                 <radialGradient id="budInnerPetal" cx="50%" cy="30%" r="70%">
-                  <stop offset="0%" stop-color="#fca5a5"/>
-                  <stop offset="50%" stop-color="#ef4444"/>
-                  <stop offset="100%" stop-color="#991b1b"/>
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="35%" stop-color="#fef08a"/>
+                  <stop offset="70%" stop-color="#eab308"/>
+                  <stop offset="100%" stop-color="#92400e"/>
                 </radialGradient>
                 <linearGradient id="budGoldVein" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#fef08a"/>
+                  <stop offset="0%" stop-color="#ffffff"/>
                   <stop offset="50%" stop-color="#ffd700"/>
                   <stop offset="100%" stop-color="#b45309"/>
                 </linearGradient>
-                <linearGradient id="budJadeLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#34d399"/>
-                  <stop offset="50%" stop-color="#059669"/>
-                  <stop offset="100%" stop-color="#064e3b"/>
+                <linearGradient id="budSepalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fef08a"/>
+                  <stop offset="45%" stop-color="#d4af37"/>
+                  <stop offset="80%" stop-color="#b45309"/>
+                  <stop offset="100%" stop-color="#78350f"/>
                 </linearGradient>
                 <filter id="budGlow" x="-25%" y="-25%" width="150%" height="150%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#ffd700" flood-opacity="0.6"/>
+                  <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#ffd700" flood-opacity="0.8"/>
                 </filter>
               </defs>
 
-              <!-- Đài hoa & Lá lộc xanh ngọc bích viền chỉ vàng kim ôm đài nụ hoa -->
+              <!-- Đài hoa & Lá hoàng kim ôm đài nụ hoa -->
               <g class="cv-bud-sepals" filter="url(#budGlow)">
-                <path d="M 60 125 C 40 120 20 100 15 75 C 25 72 45 88 58 112 Z" fill="url(#budJadeLeaf)" stroke="#ffd700" stroke-width="1.4"/>
-                <path d="M 60 125 Q 32 98 15 75" stroke="#fef08a" stroke-width="1" fill="none" opacity="0.8"/>
-                <path d="M 60 125 C 80 120 100 100 105 75 C 95 72 75 88 62 112 Z" fill="url(#budJadeLeaf)" stroke="#ffd700" stroke-width="1.4"/>
-                <path d="M 60 125 Q 88 98 105 75" stroke="#fef08a" stroke-width="1" fill="none" opacity="0.8"/>
-                <path d="M 52 125 C 50 135 70 135 68 125 Z" fill="url(#budJadeLeaf)" stroke="#ffd700" stroke-width="1.2"/>
+                <path d="M 60 125 C 40 120 20 100 15 75 C 25 72 45 88 58 112 Z" fill="url(#budSepalGrad)" stroke="#ffd700" stroke-width="1.4"/>
+                <path d="M 60 125 Q 32 98 15 75" stroke="#fef08a" stroke-width="1" fill="none" opacity="0.85"/>
+                <path d="M 60 125 C 80 120 100 100 105 75 C 95 72 75 88 62 112 Z" fill="url(#budSepalGrad)" stroke="#ffd700" stroke-width="1.4"/>
+                <path d="M 60 125 Q 88 98 105 75" stroke="#fef08a" stroke-width="1" fill="none" opacity="0.85"/>
+                <path d="M 52 125 C 50 135 70 135 68 125 Z" fill="url(#budSepalGrad)" stroke="#ffd700" stroke-width="1.2"/>
               </g>
 
-              <!-- Nụ hoa chớm nở (Các cánh hoa đỏ ruby viền vàng ôm lớp hé mở) -->
+              <!-- Nụ hoa chớm nở (Các cánh hoa màu hoàng kim óng ả viền vàng ôm lớp hé mở) -->
               <g class="cv-bud-petals">
                 <path d="M 60 115 C 38 95 36 45 60 18 C 84 45 82 95 60 115 Z" 
                       fill="url(#budInnerPetal)" stroke="url(#budGoldVein)" stroke-width="1.5" opacity="0.95"/>
-                <path d="M 60 22 L 60 110" stroke="#fde047" stroke-width="1" opacity="0.7"/>
+                <path d="M 60 22 L 60 110" stroke="#fde047" stroke-width="1.2" opacity="0.85"/>
 
                 <path d="M 60 118 C 30 105 24 55 52 28 C 42 48 46 85 62 115 Z" 
                       fill="url(#budPetalGrad)" stroke="url(#budGoldVein)" stroke-width="1.8"/>
-                <path d="M 52 28 C 46 55 48 85 60 115" stroke="#fef08a" stroke-width="1" fill="none" opacity="0.75"/>
+                <path d="M 52 28 C 46 55 48 85 60 115" stroke="#fef08a" stroke-width="1" fill="none" opacity="0.85"/>
 
                 <path d="M 60 118 C 90 105 96 55 68 28 C 78 48 74 85 58 115 Z" 
                       fill="url(#budPetalGrad)" stroke="url(#budGoldVein)" stroke-width="1.8"/>
-                <path d="M 68 28 C 74 55 72 85 60 115" stroke="#fef08a" stroke-width="1" fill="none" opacity="0.75"/>
+                <path d="M 68 28 C 74 55 72 85 60 115" stroke="#fef08a" stroke-width="1" fill="none" opacity="0.85"/>
 
                 <path d="M 60 116 C 45 95 46 55 59 36 C 63 45 74 65 71 95 C 67 108 60 116 60 116 Z" 
                       fill="url(#budInnerPetal)" stroke="url(#budGoldVein)" stroke-width="1.6"/>
 
                 <!-- Đỉnh ngọc vàng lấp lánh tỏa sáng -->
-                <circle cx="60" cy="20" r="3.5" fill="#fde047" stroke="#ffd700" stroke-width="1" filter="url(#budGlow)"/>
+                <circle cx="60" cy="20" r="4" fill="#ffffff" stroke="#ffd700" stroke-width="1.5" filter="url(#budGlow)"/>
               </g>
             </svg>
           </div>
 
-          <!-- 6 BÔNG HOA NẰM TRÊN 6 NHÁNH CÂY (3 TRÁI, 3 PHẢI XEN KẼ TRÊN DƯỚI) -->
+          <!-- 6 BÔNG HOA NẰM TRÊN 6 NHÁNH CÂY (MÀU HOÀNG KIM ĐỒNG ĐIỆU VỚI THÂN CÂY) -->
           <!-- Bông hoa 1: Nhánh trên bên trái -->
           <div class="cv-tree-flower cv-flower-1 cv-interactive" data-pair="1" style="top: 17%; left: 21%;">
             <svg class="cv-flower" viewBox="0 0 100 100">
               <defs>
-                <radialGradient id="fPetalGrad" cx="50%" cy="40%" r="60%">
-                  <stop offset="0%" stop-color="#ff5252"/>
-                  <stop offset="70%" stop-color="#dc2626"/>
-                  <stop offset="100%" stop-color="#881313"/>
+                <radialGradient id="fPetalGrad" cx="50%" cy="30%" r="70%">
+                  <stop offset="0%" stop-color="#fff8db"/>
+                  <stop offset="25%" stop-color="#fde047"/>
+                  <stop offset="60%" stop-color="#d4af37"/>
+                  <stop offset="85%" stop-color="#b45309"/>
+                  <stop offset="100%" stop-color="#78350f"/>
                 </radialGradient>
-                <linearGradient id="fLeafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#10b981"/>
-                  <stop offset="50%" stop-color="#059669"/>
-                  <stop offset="100%" stop-color="#047857"/>
+                <linearGradient id="fPetalStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="50%" stop-color="#ffd700"/>
+                  <stop offset="100%" stop-color="#92400e"/>
                 </linearGradient>
+                <linearGradient id="fLeafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fef08a"/>
+                  <stop offset="45%" stop-color="#d4af37"/>
+                  <stop offset="80%" stop-color="#b45309"/>
+                  <stop offset="100%" stop-color="#78350f"/>
+                </linearGradient>
+                <radialGradient id="fCenterGrad" cx="35%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="40%" stop-color="#fef08a"/>
+                  <stop offset="80%" stop-color="#eab308"/>
+                  <stop offset="100%" stop-color="#78350f"/>
+                </radialGradient>
               </defs>
-              <!-- Lá lộc ngọc bích viền chỉ vàng kim -->
+              <!-- Lá lộc hoàng kim viền chỉ vàng sáng -->
               <g class="cv-flower-leaves">
                 <path d="M 50 50 C 30 65 15 55 10 40 C 25 35 45 42 50 50 Z" fill="url(#fLeafGrad)" stroke="#ffd700" stroke-width="1.2"/>
                 <path d="M 50 50 C 65 70 85 65 92 50 C 80 40 60 42 50 50 Z" fill="url(#fLeafGrad)" stroke="#ffd700" stroke-width="1.2"/>
                 <path d="M 50 50 C 55 75 45 88 35 90 C 32 75 42 60 50 50 Z" fill="url(#fLeafGrad)" stroke="#ffd700" stroke-width="1.2"/>
               </g>
               <g transform="translate(50,50)">
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(0)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(51.4)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(102.9)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(154.3)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(205.7)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(257.1)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(308.6)"/>
-                <circle cx="0" cy="0" r="5" fill="#fef08a" stroke="#d4af37" stroke-width="1"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(0)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(51.4)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(102.9)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(154.3)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(205.7)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(257.1)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(308.6)"/>
+                <circle cx="0" cy="0" r="6" fill="url(#fCenterGrad)" stroke="#ffffff" stroke-width="1"/>
               </g>
             </svg>
             <div class="cv-firework-container"></div>
@@ -365,14 +382,14 @@
                 <path d="M 50 50 C 55 75 45 88 35 90 C 32 75 42 60 50 50 Z" fill="url(#fLeafGrad)" stroke="#ffd700" stroke-width="1.2"/>
               </g>
               <g transform="translate(50,50)">
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(0)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(51.4)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(102.9)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(154.3)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(205.7)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(257.1)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(308.6)"/>
-                <circle cx="0" cy="0" r="5" fill="#fef08a" stroke="#d4af37" stroke-width="1"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(0)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(51.4)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(102.9)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(154.3)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(205.7)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(257.1)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(308.6)"/>
+                <circle cx="0" cy="0" r="6" fill="url(#fCenterGrad)" stroke="#ffffff" stroke-width="1"/>
               </g>
             </svg>
             <div class="cv-firework-container"></div>
@@ -387,14 +404,14 @@
                 <path d="M 50 50 C 55 75 45 88 35 90 C 32 75 42 60 50 50 Z" fill="url(#fLeafGrad)" stroke="#ffd700" stroke-width="1.2"/>
               </g>
               <g transform="translate(50,50)">
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(0)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(51.4)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(102.9)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(154.3)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(205.7)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(257.1)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(308.6)"/>
-                <circle cx="0" cy="0" r="5" fill="#fef08a" stroke="#d4af37" stroke-width="1"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(0)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(51.4)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(102.9)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(154.3)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(205.7)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(257.1)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(308.6)"/>
+                <circle cx="0" cy="0" r="6" fill="url(#fCenterGrad)" stroke="#ffffff" stroke-width="1"/>
               </g>
             </svg>
             <div class="cv-firework-container"></div>
@@ -409,14 +426,14 @@
                 <path d="M 50 50 C 55 75 45 88 35 90 C 32 75 42 60 50 50 Z" fill="url(#fLeafGrad)" stroke="#ffd700" stroke-width="1.2"/>
               </g>
               <g transform="translate(50,50)">
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(0)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(51.4)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(102.9)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(154.3)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(205.7)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(257.1)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(308.6)"/>
-                <circle cx="0" cy="0" r="5" fill="#fef08a" stroke="#d4af37" stroke-width="1"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(0)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(51.4)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(102.9)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(154.3)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(205.7)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(257.1)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(308.6)"/>
+                <circle cx="0" cy="0" r="6" fill="url(#fCenterGrad)" stroke="#ffffff" stroke-width="1"/>
               </g>
             </svg>
             <div class="cv-firework-container"></div>
@@ -431,14 +448,14 @@
                 <path d="M 50 50 C 55 75 45 88 35 90 C 32 75 42 60 50 50 Z" fill="url(#fLeafGrad)" stroke="#ffd700" stroke-width="1.2"/>
               </g>
               <g transform="translate(50,50)">
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(0)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(51.4)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(102.9)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(154.3)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(205.7)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(257.1)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(308.6)"/>
-                <circle cx="0" cy="0" r="5" fill="#fef08a" stroke="#d4af37" stroke-width="1"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(0)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(51.4)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(102.9)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(154.3)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(205.7)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(257.1)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(308.6)"/>
+                <circle cx="0" cy="0" r="6" fill="url(#fCenterGrad)" stroke="#ffffff" stroke-width="1"/>
               </g>
             </svg>
             <div class="cv-firework-container"></div>
@@ -453,14 +470,14 @@
                 <path d="M 50 50 C 55 75 45 88 35 90 C 32 75 42 60 50 50 Z" fill="url(#fLeafGrad)" stroke="#ffd700" stroke-width="1.2"/>
               </g>
               <g transform="translate(50,50)">
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(0)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(51.4)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(102.9)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(154.3)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(205.7)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(257.1)"/>
-                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" transform="rotate(308.6)"/>
-                <circle cx="0" cy="0" r="5" fill="#fef08a" stroke="#d4af37" stroke-width="1"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(0)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(51.4)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(102.9)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(154.3)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(205.7)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(257.1)"/>
+                <ellipse cx="0" cy="-20" rx="12" ry="20" fill="url(#fPetalGrad)" stroke="url(#fPetalStroke)" stroke-width="0.8" transform="rotate(308.6)"/>
+                <circle cx="0" cy="0" r="6" fill="url(#fCenterGrad)" stroke="#ffffff" stroke-width="1"/>
               </g>
             </svg>
             <div class="cv-firework-container"></div>

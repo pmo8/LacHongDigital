@@ -419,9 +419,39 @@ document.addEventListener('DOMContentLoaded', function () {
           });
         }
       });
+
+      // Hỗ trợ Click / Chạm (Tap) mượt mà trên Mobile & Tablet
+      el.addEventListener('click', function () {
+        var now = Date.now();
+        var last = cooldowns.get(el) || 0;
+        if (now - last < 280) return;
+        cooldowns.set(el, now);
+
+        var burstCount = isFlower ? 32 : 24;
+        var burstDist = isFlower ? 85 : 75;
+        createFirework(el, burstCount, burstDist);
+        createSparkles(el, 5, isFlower ? 60 : 55);
+
+        if (pairId && pairId !== 'grand') {
+          var pairedEls = document.querySelectorAll('.cv-interactive[data-pair="' + pairId + '"]');
+          pairedEls.forEach(function (paired) {
+            paired.classList.add('is-active');
+            if (paired !== el && isFlower) {
+              createFirework(paired, 16, 55);
+            }
+          });
+
+          // Tự động tắt phát sáng sau 2.2 giây trên mobile/tablet
+          setTimeout(function () {
+            pairedEls.forEach(function (paired) {
+              paired.classList.remove('is-active');
+            });
+          }, 2200);
+        }
+      });
     });
 
-    // 10. Hiệu ứng lấp lánh hoàng kim khi di chuyển chuột vào thân cây
+    // 10. Hiệu ứng lấp lánh hoàng kim khi di chuyển chuột hoặc chạm vuốt vào thân cây (Cả Desktop, Tablet & Mobile)
     var treeCenter = document.querySelector('.cv-tree-center');
     var sparkleLayer = document.querySelector('.cv-tree-sparkles-layer');
 
@@ -429,17 +459,14 @@ document.addEventListener('DOMContentLoaded', function () {
       var lastSparkleTime = 0;
       var treeGoldColors = ['#ffd700', '#fff3a8', '#fde047', '#ffb703', '#ffffff', '#e5c378'];
 
-      treeCenter.addEventListener('mousemove', function (e) {
-        // Không tạo bụi sao nếu đang rê chuột lên trên bông hoa
-        if (e.target.closest('.cv-tree-flower')) return;
-
+      function spawnTreeSparkles(clientX, clientY) {
         var now = Date.now();
         if (now - lastSparkleTime < 35) return; // Tạo luồng bụi sao dày dặn, mượt mà
         lastSparkleTime = now;
 
         var rect = treeCenter.getBoundingClientRect();
-        var x = e.clientX - rect.left;
-        var y = e.clientY - rect.top;
+        var x = clientX - rect.left;
+        var y = clientY - rect.top;
 
         for (var i = 0; i < 3; i++) {
           var s = document.createElement('div');
@@ -468,7 +495,19 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 850);
           })(s);
         }
+      }
+
+      treeCenter.addEventListener('mousemove', function (e) {
+        // Không tạo bụi sao nếu đang rê chuột lên trên bông hoa
+        if (e.target.closest('.cv-tree-flower')) return;
+        spawnTreeSparkles(e.clientX, e.clientY);
       });
+
+      treeCenter.addEventListener('touchmove', function (e) {
+        if (!e.touches || !e.touches[0]) return;
+        if (e.target.closest('.cv-tree-flower')) return;
+        spawnTreeSparkles(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: true });
     }
   }
 });

@@ -1,0 +1,533 @@
+/**
+ * LẠC HỒNG DIGITAL - IN-PAGE ADMIN CMS STYLES (SONG NGỮ & QUẢN LÝ ẢNH)
+ * Giao diện thanh công cụ quản trị, chế độ sửa chữ trực tiếp, đổi ảnh và hộp thoại lưu GitHub
+ */
+
+/* ── 1. PHẦN TỬ ĐANG Ở CHẾ ĐỘ CHỈNH SỬA VĂN BẢN ── */
+body.lh-admin-active [data-lh-editable="true"] {
+  position: relative;
+  transition: outline 0.15s ease, background-color 0.15s ease;
+  z-index: 5;
+  pointer-events: auto !important;
+}
+
+body.lh-admin-active .hero-overlay,
+body.lh-admin-active .hero-pattern {
+  pointer-events: none !important;
+}
+
+body.lh-admin-active:not(.lh-admin-preview) [data-lh-editable="true"]:hover {
+  outline: 2px dashed #d4af37 !important;
+  outline-offset: 2px;
+  cursor: text;
+  background-color: rgba(212, 175, 55, 0.08) !important;
+}
+
+body.lh-admin-active:not(.lh-admin-preview) [data-lh-editable="true"]:focus {
+  outline: 2px solid #28a745 !important;
+  outline-offset: 2px;
+  background-color: rgba(40, 167, 69, 0.1) !important;
+}
+
+body.lh-admin-active:not(.lh-admin-preview) [data-lh-editable="true"].lh-item-changed {
+  outline: 2px solid #ff9800 !important;
+  outline-offset: 2px;
+  background-color: rgba(255, 152, 0, 0.1) !important;
+}
+
+/* ── 1.1. PHẦN TỬ HÌNH ẢNH CÓ THỂ ĐỔI (IMAGE EDITABLE) ── */
+body.lh-admin-active:not(.lh-admin-preview) [data-lh-image="true"] {
+  position: relative;
+  cursor: pointer !important;
+  transition: outline 0.2s ease, filter 0.2s ease;
+  pointer-events: auto !important;
+}
+
+body.lh-admin-active:not(.lh-admin-preview) [data-lh-image="true"]:hover {
+  outline: 3px dashed #2ecc71 !important;
+  outline-offset: 2px;
+  filter: brightness(0.92);
+}
+
+body.lh-admin-active:not(.lh-admin-preview) [data-lh-image="true"].lh-item-changed {
+  outline: 3px solid #ff9800 !important;
+  outline-offset: 2px;
+}
+
+/* ── 2. THANH CÔNG CỤ ADMIN NỔI (ADMIN TOOLBAR) ── */
+#lh-admin-bar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999999;
+  background: rgba(18, 18, 22, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-radius: 50px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.25);
+  padding: 8px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  color: #ffffff;
+  user-select: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lh-admin-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #781017, #5a0e14);
+  color: #ffd700;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  white-space: nowrap;
+}
+
+.lh-admin-badge i {
+  color: #ffd700;
+  animation: lhPulse 2s infinite;
+}
+
+@keyframes lhPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.92); }
+}
+
+.lh-admin-counter {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.lh-admin-counter.has-changes {
+  background: rgba(255, 152, 0, 0.25);
+  color: #ffb74d;
+  border: 1px solid rgba(255, 152, 0, 0.5);
+}
+
+.lh-admin-lang-indicator {
+  background: rgba(212, 175, 55, 0.2);
+  color: #ffd700;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.lh-admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lh-admin-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 25px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.lh-admin-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.lh-admin-btn-save {
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+  border-color: #28a745;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.lh-admin-btn-save:hover {
+  background: linear-gradient(135deg, #2ecc71, #28a745);
+  box-shadow: 0 6px 16px rgba(40, 167, 69, 0.45);
+}
+
+.lh-admin-btn-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.lh-admin-btn-preview.active {
+  background: #ff9800;
+  border-color: #ff9800;
+  color: #fff;
+}
+
+.lh-admin-btn-exit {
+  background: rgba(220, 53, 69, 0.15);
+  border-color: rgba(220, 53, 69, 0.4);
+  color: #ff6b6b;
+}
+
+.lh-admin-btn-exit:hover {
+  background: rgba(220, 53, 69, 0.35);
+  color: #fff;
+}
+
+/* ── 3. MODAL HỘP THOẠI ĐĂNG NHẬP, ĐỔI ẢNH VÀ LƯU GITHUB ── */
+.lh-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000000;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s ease;
+}
+
+.lh-modal-backdrop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lh-modal-card {
+  background: #1e1e24;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(212, 175, 55, 0.15);
+  color: #f0f0f0;
+  overflow: hidden;
+  transform: scale(0.94);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+}
+
+.lh-modal-backdrop.show .lh-modal-card {
+  transform: scale(1);
+}
+
+.lh-modal-header {
+  background: linear-gradient(135deg, #42080d, #250407);
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.lh-modal-header h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffd700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lh-modal-close {
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.lh-modal-close:hover {
+  color: #fff;
+}
+
+.lh-modal-body {
+  padding: 24px;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.lh-form-group {
+  margin-bottom: 18px;
+}
+
+.lh-form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #e0e0e0;
+}
+
+.lh-form-group input,
+.lh-form-group textarea {
+  width: 100%;
+  padding: 10px 14px;
+  background: #141418;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.lh-form-group input:focus,
+.lh-form-group textarea:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+.lh-form-help {
+  font-size: 12px;
+  color: #999;
+  margin-top: 5px;
+}
+
+.lh-form-help a {
+  color: #ffd700;
+  text-decoration: underline;
+}
+
+/* Danh sách thay đổi song ngữ & hình ảnh */
+.lh-changes-list {
+  max-height: 260px;
+  overflow-y: auto;
+  background: #141418;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 18px;
+  font-size: 12px;
+}
+
+.lh-change-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.lh-change-card:last-child {
+  margin-bottom: 0;
+}
+
+.lh-change-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.lh-badge-vi {
+  background: #781017;
+  color: #ffd700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.lh-badge-en {
+  background: #0d47a1;
+  color: #90caf9;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.lh-badge-img {
+  background: #1e7e34;
+  color: #a8f0b7;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.lh-en-input-wrap {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.lh-en-input-wrap label {
+  font-size: 11px;
+  color: #90caf9;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 4px;
+}
+
+.lh-en-input-wrap input {
+  width: 100%;
+  padding: 7px 10px;
+  background: #0f141c;
+  border: 1px solid rgba(144, 202, 249, 0.3);
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.lh-en-input-wrap input:focus {
+  border-color: #64b5f6;
+  box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.2);
+}
+
+/* Vùng Dropzone Upload Hình Ảnh */
+.lh-dropzone {
+  border: 2px dashed rgba(212, 175, 55, 0.5);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(212, 175, 55, 0.04);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 16px;
+}
+
+.lh-dropzone:hover,
+.lh-dropzone.dragover {
+  border-color: #ffd700;
+  background: rgba(212, 175, 55, 0.12);
+  transform: scale(1.01);
+}
+
+.lh-dropzone i {
+  font-size: 36px;
+  color: #ffd700;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.lh-img-preview-box {
+  width: 100%;
+  max-height: 220px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: #101014;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lh-img-preview-box img {
+  max-width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  display: block;
+}
+
+.lh-modal-footer {
+  padding: 16px 24px;
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ── 4. THÔNG BÁO TOAST NỔI ── */
+#lh-admin-toast {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  z-index: 1000001;
+  background: #1e1e24;
+  color: #fff;
+  border-left: 4px solid #28a745;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateY(-50px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+  max-width: 450px;
+}
+
+#lh-admin-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#lh-admin-toast.error {
+  border-left-color: #dc3545;
+}
+
+#lh-admin-toast.warning {
+  border-left-color: #ff9800;
+}
+
+/* Nút kích hoạt nhanh Admin ở chân trang */
+.lh-admin-trigger-link {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 11px;
+  text-decoration: none;
+  transition: color 0.2s;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.lh-admin-trigger-link:hover {
+  color: #ffd700;
+}

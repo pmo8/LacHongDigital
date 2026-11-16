@@ -120,6 +120,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function startSlideTimer() {
+      // Dừng tự động chuyển slide nếu đang ở chế độ Quản trị (Admin) để không làm mất tập trung khi sửa chữ
+      if (document.body.classList.contains('lh-admin-active') || sessionStorage.getItem('lh_admin_active') === 'true') {
+        return;
+      }
       slideInterval = setInterval(nextSlide, 6500);
     }
 
@@ -129,6 +133,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     startSlideTimer();
+
+    // Lắng nghe sự kiện bật/tắt chế độ Admin để tạm dừng hoặc kích hoạt lại chuyển slide tự động
+    window.addEventListener('adminModeChanged', function (e) {
+      if (e.detail && e.detail.active) {
+        clearInterval(slideInterval);
+      } else {
+        resetSlideTimer();
+      }
+    });
   }
 
   // 4. Project Filter Tabs

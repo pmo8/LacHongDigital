@@ -470,6 +470,14 @@
       if (lang === 'vi') return text;
       const trimmed = text.trim().replace(/\s+/g, ' ');
       return PHRASE_MAP[trimmed] || text;
+    },
+    addTranslation: function (vi, en) {
+      if (!vi || !en) return;
+      const trimmed = vi.trim().replace(/\s+/g, ' ');
+      PHRASE_MAP[trimmed] = en;
+    },
+    getPhraseMap: function () {
+      return PHRASE_MAP;
     }
   };
 

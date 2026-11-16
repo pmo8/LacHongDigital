@@ -155,10 +155,20 @@ img {
 
 .lang-switch a {
   color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.1rem 0.25rem;
+  border-radius: 3px;
+}
+
+.lang-switch a:hover {
+  color: #ffffff;
 }
 
 .lang-switch a.active {
   color: var(--gold-light);
+  font-weight: 800;
+  text-shadow: 0 0 8px rgba(253, 224, 71, 0.6);
 }
 
 /* ==========================================================================

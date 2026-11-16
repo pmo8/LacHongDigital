@@ -223,14 +223,16 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // 7. Consultation & Contact Form Handling (Tích hợp Web3Forms gửi thẳng về contact@lachongdigital.vn)
-  function handleWeb3FormSubmit(form, submitBtn, defaultBtnHtml, successMessage) {
+  function handleWeb3FormSubmit(form, submitBtn, defaultKey) {
     if (!form) return;
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang gửi yêu cầu...';
+        submitBtn.innerHTML = window.LacHongI18n
+          ? window.LacHongI18n.getMessage('submitting')
+          : '<i class="fas fa-spinner fa-spin"></i> Đang gửi yêu cầu...';
       }
 
       const formData = new FormData(form);
@@ -242,19 +244,37 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(async function (response) {
           const json = await response.json();
           if (response.status === 200 && json.success) {
-            alert(successMessage || 'Cảm ơn Quý đối tác! Yêu cầu đã được gửi thành công đến hòm thư contact@lachongdigital.vn. Chuyên viên Viện Lạc Hồng Digital sẽ liên hệ trong thời gian sớm nhất.');
+            const successMsg = window.LacHongI18n
+              ? window.LacHongI18n.getMessage(defaultKey === 'contact' ? 'contact_success' : 'cta_success')
+              : 'Cảm ơn Quý đối tác! Yêu cầu đã được gửi thành công.';
+            alert(successMsg);
             form.reset();
           } else {
-            alert(json.message || 'Có lỗi xảy ra khi gửi. Quý vị vui lòng thử lại hoặc liên hệ hotline: 0909.860.118!');
+            const errorMsg = window.LacHongI18n
+              ? window.LacHongI18n.getMessage('submit_error')
+              : (json.message || 'Có lỗi xảy ra khi gửi. Quý vị vui lòng thử lại hoặc liên hệ hotline: 0909.860.118!');
+            alert(errorMsg);
           }
         })
         .catch(function () {
-          alert('Không thể kết nối đến máy chủ gửi thư. Quý vị vui lòng gọi hotline 0909.860.118 để được hỗ trợ tức thì!');
+          const failMsg = window.LacHongI18n
+            ? window.LacHongI18n.getMessage('submit_fail')
+            : 'Không thể kết nối đến máy chủ gửi thư. Quý vị vui lòng gọi hotline 0909.860.118 để được hỗ trợ tức thì!';
+          alert(failMsg);
         })
         .finally(function () {
           if (submitBtn) {
             submitBtn.disabled = false;
-            submitBtn.innerHTML = defaultBtnHtml;
+            const currentLang = window.LacHongI18n ? window.LacHongI18n.getLang() : 'vi';
+            if (defaultKey === 'contact') {
+              submitBtn.innerHTML = currentLang === 'en'
+                ? '<i class="fas fa-paper-plane"></i> Submit Request Online'
+                : '<i class="fas fa-paper-plane"></i> Gửi Yêu Cầu Trực Tuyến';
+            } else {
+              submitBtn.innerHTML = currentLang === 'en'
+                ? '<i class="fas fa-paper-plane"></i> Submit Support Request'
+                : '<i class="fas fa-paper-plane"></i> Gửi Yêu Cầu Hỗ Trợ';
+            }
           }
         });
     });
@@ -263,22 +283,12 @@ document.addEventListener('DOMContentLoaded', function () {
   // 7.1. Form Gửi Yêu Cầu Tư Vấn / Hợp Tác (trên trang liên hệ lien-he.html)
   const contactPageForm = document.getElementById('contactPageForm');
   const contactPageSubmitBtn = document.getElementById('contactPageSubmitBtn');
-  handleWeb3FormSubmit(
-    contactPageForm,
-    contactPageSubmitBtn,
-    '<i class="fas fa-paper-plane"></i> Gửi Yêu Cầu Trực Tuyến',
-    'Cảm ơn Quý đối tác! Yêu cầu tư vấn / hợp tác đã được gửi thành công đến hòm thư contact@lachongdigital.vn. Chuyên gia Lạc Hồng Digital sẽ phản hồi trong vòng 24 giờ làm việc.'
-  );
+  handleWeb3FormSubmit(contactPageForm, contactPageSubmitBtn, 'contact');
 
   // 7.2. Form Nhận Hồ Sơ Năng Lực & Tư Vấn (trên trang chủ index.html)
   const ctaForm = document.getElementById('consultationForm');
   const consultationSubmitBtn = document.getElementById('consultationSubmitBtn');
-  handleWeb3FormSubmit(
-    ctaForm,
-    consultationSubmitBtn,
-    '<i class="fas fa-paper-plane"></i> Gửi Yêu Cầu Hỗ Trợ',
-    'Cảm ơn Quý đối tác! Yêu cầu nhận hồ sơ năng lực & tư vấn đã được gửi thành công đến hòm thư contact@lachongdigital.vn. Chuyên viên Lạc Hồng Digital sẽ liên hệ sớm nhất.'
-  );
+  handleWeb3FormSubmit(ctaForm, consultationSubmitBtn, 'cta');
 
   const newsletterForm = document.getElementById('newsletterForm');
   if (newsletterForm) {
@@ -286,7 +296,10 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault();
       const email = this.querySelector('input[type="email"]')?.value;
       if (email) {
-        alert(`Cảm ơn bạn đã đăng ký nhận bản tin nghiên cứu và sự kiện từ Lạc Hồng Digital (${email})!`);
+        const msg = window.LacHongI18n
+          ? window.LacHongI18n.getMessage('newsletter_success', email)
+          : `Cảm ơn bạn đã đăng ký nhận bản tin nghiên cứu và sự kiện từ Lạc Hồng Digital (${email})!`;
+        alert(msg);
         newsletterForm.reset();
       }
     });
@@ -301,10 +314,15 @@ document.addEventListener('DOMContentLoaded', function () {
     projectDetailBtns.forEach(btn => {
       btn.addEventListener('click', function (e) {
         e.preventDefault();
-        const title = this.getAttribute('data-title') || 'Thông tin dự án';
-        const desc = this.getAttribute('data-desc') || '';
-        const scope = this.getAttribute('data-scope') || '';
-        const client = this.getAttribute('data-client') || '';
+        const rawTitle = this.getAttribute('data-title') || 'Thông tin dự án';
+        const rawDesc = this.getAttribute('data-desc') || '';
+        const rawScope = this.getAttribute('data-scope') || '';
+        const rawClient = this.getAttribute('data-client') || '';
+
+        const title = window.LacHongI18n ? window.LacHongI18n.translate(rawTitle) : rawTitle;
+        const desc = window.LacHongI18n ? window.LacHongI18n.translate(rawDesc) : rawDesc;
+        const scope = window.LacHongI18n ? window.LacHongI18n.translate(rawScope) : rawScope;
+        const client = window.LacHongI18n ? window.LacHongI18n.translate(rawClient) : rawClient;
 
         const mTitle = document.getElementById('projectModalTitle');
         const mDesc = document.getElementById('projectModalDesc');
@@ -341,7 +359,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const cvSpotlightClose = document.getElementById('cvSpotlightClose');
 
   if (cvInteractives.length) {
-    const cvData = {
+    window.LacHongCoreValues = window.LacHongCoreValues || {
       '1': 'Mãi mãi tinh thần Khởi nghiệp',
       '2': 'Thích ứng nhanh là sức mạnh cạnh tranh',
       '3': 'Lựa chọn đúng quan trọng hơn sự nỗ lực cố gắng',
@@ -349,6 +367,7 @@ document.addEventListener('DOMContentLoaded', function () {
       '5': 'Đồng hành, hiện diện, kề vai sát cánh và chung lưng đấu cật cùng dân tộc',
       '6': 'Đông Tây kết hợp'
     };
+    const cvData = window.LacHongCoreValues;
 
     // Kiểm tra xem thiết bị có phải là màn hình cảm ứng (Mobile/Tablet) không
     const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || window.matchMedia('(pointer: coarse)').matches;
@@ -357,7 +376,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Hiển thị nội dung giá trị cốt lõi to rõ ràng
     function showCoreValue(pairId) {
-      if (!pairId || !cvData[pairId]) return;
+      const data = window.LacHongCoreValues || {};
+      if (!pairId || !data[pairId]) return;
       currentActiveId = pairId;
 
       // 1. Cập nhật trạng thái trên cây (phóng to chữ và làm sáng hoa tương ứng)
@@ -377,7 +397,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // 2. Cập nhật hộp đọc to rõ Spotlight Box (nằm ngay dưới gốc cây)
       if (cvSpotlightBox && cvSpotlightText) {
         if (cvSpotlightBadge) cvSpotlightBadge.textContent = '0' + pairId;
-        cvSpotlightText.textContent = cvData[pairId];
+        cvSpotlightText.textContent = data[pairId];
         cvSpotlightBox.classList.add('show');
       }
     }

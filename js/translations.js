@@ -412,7 +412,10 @@
   "Tin Tức & Sự Kiện | Lạc Hồng Digital - Viện Nghiên Cứu Lạc Hồng": "News & Events | Lac Hong Digital - Lac Hong Research Institute",
   "Tin Tức & Sự Kiện": "News & Events",
   "Liên Hệ | Lạc Hồng Digital - Viện Nghiên Cứu Lạc Hồng": "Contact Us | Lac Hong Digital - Lac Hong Research Institute",
-  "Liên Hệ & Hợp Tác": "Contact & Strategic Partnership"
+  "Liên Hệ & Hợp Tác": "Contact & Strategic Partnership",
+  "n trị": "n treatment",
+  "Ad": "Ad",
+  "đăng nhập": "log in"
 };
 
   // 2. THÔNG ĐIỆP ĐA NGÔN NGỮ CHO HỆ THỐNG VÀ THÔNG BÁO (ALERTS / FORMS)

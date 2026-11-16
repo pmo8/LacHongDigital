@@ -415,7 +415,15 @@
   "Liên Hệ & Hợp Tác": "Contact & Strategic Partnership",
   "n trị": "n treatment",
   "Ad": "Ad",
-  "đăng nhập": "log in"
+  "đăng nhập": "log in",
+  "Email: contact@lachongdigital.vn//": "Email: contact@lachongdigital.vn//",
+  "Email: contact@lachongdigital.vn": "Email: contact@lachongdigital.vn Te",
+  "Email: contact@lachongdigital.vn Te": "Email: contact@lachongdigital.vn Te",
+  "trị": "treat",
+  "AdA": "AdA",
+  "AdimA": "AdimA",
+  "Admin": "AdminA",
+  "AdminA": "AdminA"
 };
 
   // 2. THÔNG ĐIỆP ĐA NGÔN NGỮ CHO HỆ THỐNG VÀ THÔNG BÁO (ALERTS / FORMS)
